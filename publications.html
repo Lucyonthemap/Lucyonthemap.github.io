@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>Publications - Lucila Corro MS</title>
   <style>
     body {
@@ -63,10 +63,31 @@
       color: white;
     }
 
-    iframe {
-      width: 100%;
-      height: 700px;
-      border: none;
+    .profile-section {
+      margin-top: 2rem;
+      text-align: center;
+    }
+
+    .profile-button {
+      display: inline-block;
+      margin: 1rem;
+      padding: 0.75rem 1.5rem;
+      background-color: #2980b9;
+      color: white;
+      text-decoration: none;
+      font-weight: bold;
+      border-radius: 6px;
+      transition: background-color 0.3s ease;
+    }
+
+    .profile-button:hover {
+      background-color: #3498db;
+    }
+
+    .embed-warning {
+      font-size: 0.95rem;
+      color: #ccc;
+      margin-top: 0.5rem;
     }
 
     footer {
@@ -80,10 +101,12 @@
 </head>
 <body>
   <div style="position: fixed; inset: 0; background-color: rgba(255,255,255,0.6); z-index: -1;"></div>
+
   <header>
     <h1>Lucila Corro MS</h1>
     <p>Publications</p>
   </header>
+
   <nav>
     <ul>
       <li><a href="index.html">Home</a></li>
@@ -94,10 +117,22 @@
   </nav>
 
   <div class="container">
-    <h2>My Publications</h2>
-    <p>View my full list of publications via Google Scholar:</p>
-    <iframe src="https://scholar.google.com/citations?user=OZBqP2kAAAAJ&hl=en"></iframe>
-    <p style="text-align:center;"><a href="https://scholar.google.com/citations?user=OZBqP2kAAAAJ&hl=en" target="_blank" style="color: #add8e6;">Open in Google Scholar</a></p>
+    <h2>Explore My Scholarly Work</h2>
+    <p>Click below to view my latest publications, research collaborations, and academic impact:</p>
+
+    <div class="profile-section">
+      <a class="profile-button" href="https://scholar.google.com/citations?user=OZBqP2kAAAAJ&hl=en" target="_blank">
+        Google Scholar Profile
+      </a>
+      <div class="embed-warning">(Embedding not supported — opens in new tab)</div>
+    </div>
+
+    <div class="profile-section">
+      <a class="profile-button" href="https://www.researchgate.net/profile/Lucila-Corro?ev=hdr_xprf" target="_blank">
+        ResearchGate Profile
+      </a>
+      <div class="embed-warning">(Embedding not supported — opens in new tab)</div>
+    </div>
   </div>
 
   <footer>
