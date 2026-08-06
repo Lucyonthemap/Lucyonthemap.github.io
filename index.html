@@ -17,7 +17,7 @@
 
   <style>
     :root {
-      --background: #071018;
+      --background: #050a10;
       --background-soft: #0b1722;
       --panel: rgba(14, 29, 41, 0.78);
       --panel-solid: #0e1d29;
@@ -29,6 +29,8 @@
       --cyan-soft: rgba(92, 225, 230, 0.12);
       --blue: #57a7ff;
       --green: #74e0a7;
+      --amber: #f5c26b;
+      --pink: #ff8fd6;
       --border: rgba(130, 194, 218, 0.16);
       --border-bright: rgba(92, 225, 230, 0.34);
       --shadow: 0 28px 80px rgba(0, 0, 0, 0.36);
@@ -78,6 +80,8 @@
         auto;
       font-family: var(--sans);
       line-height: 1.7;
+      position: relative;
+      overflow-x: hidden;
     }
 
     body::before {
@@ -92,6 +96,24 @@
           rgba(39, 94, 123, 0.13),
           transparent 28rem
         );
+    }
+
+    /* scanline overlay */
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: 999;
+      pointer-events: none;
+      background: repeating-linear-gradient(
+        to bottom,
+        rgba(255, 255, 255, 0.012) 0px,
+        rgba(255, 255, 255, 0.012) 1px,
+        transparent 1px,
+        transparent 3px
+      );
+      opacity: 0.5;
+      mix-blend-mode: overlay;
     }
 
     img,
@@ -113,7 +135,7 @@
       top: 0;
       z-index: 100;
       border-bottom: 1px solid var(--border);
-      background: rgba(7, 16, 24, 0.82);
+      background: rgba(5, 10, 16, 0.82);
       backdrop-filter: blur(18px);
     }
 
@@ -217,6 +239,12 @@
       border-radius: 50%;
       background: var(--green);
       box-shadow: 0 0 14px rgba(116, 224, 167, 0.7);
+      animation: pulse-dot 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.85); }
     }
 
     .hero h1 {
@@ -237,6 +265,33 @@
       margin: 30px 0 0;
       color: var(--text-soft);
       font-size: clamp(1.08rem, 2vw, 1.28rem);
+    }
+
+    .terminal-line {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 22px;
+      color: var(--cyan);
+      font-family: var(--mono);
+      font-size: 0.92rem;
+    }
+
+    .terminal-prompt {
+      color: var(--text-muted);
+    }
+
+    .terminal-cursor {
+      display: inline-block;
+      width: 8px;
+      height: 1.1em;
+      background: var(--cyan);
+      animation: blink 1s steps(1) infinite;
+      vertical-align: middle;
+    }
+
+    @keyframes blink {
+      50% { opacity: 0; }
     }
 
     .hero-actions {
@@ -306,8 +361,8 @@
       background-image:
         linear-gradient(
           to top,
-          rgba(7, 16, 24, 0.92),
-          rgba(7, 16, 24, 0.08) 62%
+          rgba(5, 10, 16, 0.92),
+          rgba(5, 10, 16, 0.1) 62%
         ),
         url("IMG_0260 - Copy.JPG");
       background-position: center;
@@ -321,6 +376,14 @@
       inset: 0;
       border-radius: inherit;
       box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.04);
+    }
+
+    .geo-overlay {
+      position: absolute;
+      inset: 0;
+      z-index: 2;
+      pointer-events: none;
+      opacity: 0.55;
     }
 
     .profile-chip {
@@ -375,6 +438,7 @@
     .section {
       padding: 96px 0;
       border-top: 1px solid var(--border);
+      position: relative;
     }
 
     .section-heading {
@@ -411,7 +475,10 @@
     .code-panel,
     .project-card,
     .capability-card,
-    .embed-card {
+    .embed-card,
+    .stat-panel,
+    .chart-panel,
+    .terminal-window {
       border: 1px solid var(--border);
       background: var(--panel);
       box-shadow: var(--shadow);
@@ -442,7 +509,8 @@
       border-radius: var(--radius-large);
     }
 
-    .code-bar {
+    .code-bar,
+    .terminal-bar {
       display: flex;
       align-items: center;
       gap: 7px;
@@ -459,7 +527,12 @@
       opacity: 0.7;
     }
 
-    .code-title {
+    .window-dot.red { background: #ff6b6b; opacity: 0.85; }
+    .window-dot.yellow { background: #f5c26b; opacity: 0.85; }
+    .window-dot.green { background: #74e0a7; opacity: 0.85; }
+
+    .code-title,
+    .terminal-title {
       margin-left: 8px;
       color: var(--text-muted);
       font-family: var(--mono);
@@ -664,6 +737,224 @@
       background: #ffffff;
     }
 
+    /* ===== STATS DASHBOARD ===== */
+
+    .dashboard-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+      margin-bottom: 24px;
+    }
+
+    .stat-panel {
+      padding: 22px;
+      border-radius: var(--radius-medium);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .stat-panel::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--cyan), transparent);
+    }
+
+    .stat-label {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 14px;
+      color: var(--text-muted);
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .stat-trend {
+      color: var(--green);
+      font-size: 0.66rem;
+    }
+
+    .stat-value {
+      color: var(--text);
+      font-family: var(--mono);
+      font-size: 2.1rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1;
+    }
+
+    .stat-value span {
+      color: var(--cyan);
+    }
+
+    .sparkline {
+      display: block;
+      margin-top: 14px;
+      width: 100%;
+      height: 34px;
+    }
+
+    .chart-panel {
+      padding: 30px;
+      border-radius: var(--radius-large);
+      margin-bottom: 18px;
+    }
+
+    .chart-panel-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 26px;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .chart-panel-header h3 {
+      margin: 0;
+      font-size: 1.2rem;
+    }
+
+    .chart-legend {
+      display: flex;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    .legend-item {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      color: var(--text-muted);
+      font-family: var(--mono);
+      font-size: 0.72rem;
+    }
+
+    .legend-swatch {
+      width: 9px;
+      height: 9px;
+      border-radius: 2px;
+    }
+
+    .bar-chart {
+      display: flex;
+      align-items: flex-end;
+      gap: 10px;
+      height: 200px;
+      padding-top: 10px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .bar-col {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+      height: 100%;
+      gap: 8px;
+    }
+
+    .bar {
+      width: 100%;
+      max-width: 34px;
+      border-radius: 5px 5px 0 0;
+      background: linear-gradient(to top, var(--cyan), rgba(92, 225, 230, 0.25));
+      box-shadow: 0 0 18px rgba(92, 225, 230, 0.22);
+      transform-origin: bottom;
+      animation: grow-bar 1.1s cubic-bezier(0.16, 1, 0.3, 1) both;
+    }
+
+    @keyframes grow-bar {
+      from { transform: scaleY(0); }
+      to { transform: scaleY(1); }
+    }
+
+    .bar-year {
+      color: var(--text-muted);
+      font-family: var(--mono);
+      font-size: 0.68rem;
+    }
+
+    .terminal-window {
+      border-radius: var(--radius-large);
+      overflow: hidden;
+    }
+
+    .terminal-body {
+      padding: 24px 26px;
+      font-family: var(--mono);
+      font-size: 0.86rem;
+      line-height: 2;
+      min-height: 260px;
+      color: var(--text-soft);
+    }
+
+    .terminal-body .ok { color: var(--green); }
+    .terminal-body .path { color: var(--blue); }
+    .terminal-body .comment { color: var(--text-muted); }
+    .terminal-body .highlight { color: var(--cyan); }
+
+    .stack-panel {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+      gap: 14px;
+      margin-top: 18px;
+    }
+
+    .stack-chip {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      padding: 16px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .stack-chip-name {
+      display: flex;
+      justify-content: space-between;
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      color: var(--text);
+    }
+
+    .stack-chip-name span {
+      color: var(--cyan);
+    }
+
+    .stack-bar-track {
+      height: 6px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.06);
+      overflow: hidden;
+    }
+
+    .stack-bar-fill {
+      height: 100%;
+      border-radius: 999px;
+      background: linear-gradient(90deg, var(--blue), var(--cyan));
+      transform-origin: left;
+      animation: fill-bar 1.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+    }
+
+    @keyframes fill-bar {
+      from { transform: scaleX(0); }
+      to { transform: scaleX(1); }
+    }
+
+    .dashboard-two-col {
+      display: grid;
+      grid-template-columns: minmax(0, 1.3fr) minmax(280px, 1fr);
+      gap: 18px;
+    }
+
     .site-footer {
       padding: 38px 0;
       color: var(--text-muted);
@@ -708,6 +999,14 @@
 
       .capability-grid {
         grid-template-columns: repeat(2, 1fr);
+      }
+
+      .dashboard-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .dashboard-two-col {
+        grid-template-columns: 1fr;
       }
     }
 
@@ -782,6 +1081,10 @@
         grid-template-columns: 1fr;
       }
 
+      .dashboard-grid {
+        grid-template-columns: 1fr;
+      }
+
       .footer-inner {
         flex-direction: column;
       }
@@ -823,6 +1126,10 @@
       *::after {
         transition: none !important;
       }
+
+      .bar, .stack-bar-fill, .status-dot, .terminal-cursor {
+        animation: none !important;
+      }
     }
   </style>
 </head>
@@ -837,9 +1144,10 @@
 
       <ul class="nav-links">
         <li><a href="#home">01_HOME</a></li>
-        <li><a href="research.html">02_RESEARCH</a></li>
-        <li><a href="publications.html">03_PUBLICATIONS</a></li>
-        <li><a href="contact.html">04_CONTACT</a></li>
+        <li><a href="#dashboard">02_DASHBOARD</a></li>
+        <li><a href="research.html">03_RESEARCH</a></li>
+        <li><a href="publications.html">04_PUBLICATIONS</a></li>
+        <li><a href="contact.html">05_CONTACT</a></li>
       </ul>
     </div>
   </nav>
@@ -863,10 +1171,20 @@
           environmental data to understand changing landscapes.
         </p>
 
+        <div class="terminal-line">
+          <span class="terminal-prompt">$</span>
+          <span>import ecology as geospatial_science</span>
+          <span class="terminal-cursor"></span>
+        </div>
+
         <div class="hero-actions">
           <a class="button button-primary" href="#featured-work">
             Explore featured work
             <span aria-hidden="true">→</span>
+          </a>
+
+          <a class="button button-secondary" href="#dashboard">
+            View data dashboard
           </a>
 
           <a class="button button-secondary" href="publications.html">
@@ -880,7 +1198,21 @@
           class="landscape-panel"
           role="img"
           aria-label="Environmental landscape"
-        ></div>
+        >
+          <svg class="geo-overlay" viewBox="0 0 400 400" preserveAspectRatio="none" aria-hidden="true">
+            <defs>
+              <pattern id="geoGrid" width="40" height="40" patternUnits="userSpaceOnUse">
+                <path d="M40 0L0 0 0 40" fill="none" stroke="#5ce1e6" stroke-width="0.4" opacity="0.3"/>
+              </pattern>
+            </defs>
+            <rect width="400" height="400" fill="url(#geoGrid)"/>
+            <circle cx="120" cy="90" r="3" fill="#5ce1e6" opacity="0.85"/>
+            <circle cx="270" cy="150" r="3" fill="#74e0a7" opacity="0.85"/>
+            <circle cx="200" cy="240" r="3" fill="#57a7ff" opacity="0.85"/>
+            <line x1="120" y1="90" x2="270" y2="150" stroke="#5ce1e6" stroke-width="0.6" opacity="0.4"/>
+            <line x1="270" y1="150" x2="200" y2="240" stroke="#5ce1e6" stroke-width="0.6" opacity="0.4"/>
+          </svg>
+        </div>
 
         <div class="profile-chip">
           <img
@@ -956,9 +1288,9 @@
 
           <div class="code-panel">
             <div class="code-bar">
-              <span class="window-dot"></span>
-              <span class="window-dot"></span>
-              <span class="window-dot"></span>
+              <span class="window-dot red"></span>
+              <span class="window-dot yellow"></span>
+              <span class="window-dot green"></span>
               <span class="code-title">profile.json</span>
             </div>
 
@@ -978,10 +1310,179 @@
       </div>
     </section>
 
+    <section class="section" id="dashboard">
+      <div class="page-width">
+        <div class="section-heading">
+          <div class="section-index">02 / Dashboard</div>
+
+          <h2>
+            A live look at the research and code behind the work.
+          </h2>
+        </div>
+
+        <div class="dashboard-grid">
+          <div class="stat-panel">
+            <div class="stat-label">
+              <span>Years experience</span>
+              <span class="stat-trend">▲ active</span>
+            </div>
+            <div class="stat-value"><span>9</span>+</div>
+            <svg class="sparkline" viewBox="0 0 100 30" preserveAspectRatio="none">
+              <polyline points="0,26 15,22 30,20 45,15 60,14 75,8 100,4" fill="none" stroke="#5ce1e6" stroke-width="2"/>
+            </svg>
+          </div>
+
+          <div class="stat-panel">
+            <div class="stat-label">
+              <span>Lead-author pubs</span>
+              <span class="stat-trend">since 2017</span>
+            </div>
+            <div class="stat-value"><span>01</span>st</div>
+            <svg class="sparkline" viewBox="0 0 100 30" preserveAspectRatio="none">
+              <polyline points="0,24 20,24 40,18 60,16 80,10 100,6" fill="none" stroke="#74e0a7" stroke-width="2"/>
+            </svg>
+          </div>
+
+          <div class="stat-panel">
+            <div class="stat-label">
+              <span>Coverage scale</span>
+              <span class="stat-trend">nationwide</span>
+            </div>
+            <div class="stat-value"><span>CONUS</span></div>
+            <svg class="sparkline" viewBox="0 0 100 30" preserveAspectRatio="none">
+              <polyline points="0,20 25,10 50,18 75,6 100,12" fill="none" stroke="#57a7ff" stroke-width="2"/>
+            </svg>
+          </div>
+
+          <div class="stat-panel">
+            <div class="stat-label">
+              <span>Data release</span>
+              <span class="stat-trend">2025</span>
+            </div>
+            <div class="stat-value"><span>Tree</span> canopy</div>
+            <svg class="sparkline" viewBox="0 0 100 30" preserveAspectRatio="none">
+              <polyline points="0,18 20,20 40,12 60,14 80,4 100,8" fill="none" stroke="#ff8fd6" stroke-width="2"/>
+            </svg>
+          </div>
+        </div>
+
+        <div class="dashboard-two-col">
+          <div class="chart-panel">
+            <div class="chart-panel-header">
+              <h3>Professional focus over time</h3>
+              <div class="chart-legend">
+                <span class="legend-item">
+                  <span class="legend-swatch" style="background: var(--cyan);"></span>
+                  Geospatial output
+                </span>
+              </div>
+            </div>
+
+            <div class="bar-chart">
+              <div class="bar-col">
+                <div class="bar" style="height: 28%; animation-delay: 0s;"></div>
+                <span class="bar-year">2017</span>
+              </div>
+              <div class="bar-col">
+                <div class="bar" style="height: 38%; animation-delay: 0.05s;"></div>
+                <span class="bar-year">2018</span>
+              </div>
+              <div class="bar-col">
+                <div class="bar" style="height: 34%; animation-delay: 0.1s;"></div>
+                <span class="bar-year">2019</span>
+              </div>
+              <div class="bar-col">
+                <div class="bar" style="height: 48%; animation-delay: 0.15s;"></div>
+                <span class="bar-year">2020</span>
+              </div>
+              <div class="bar-col">
+                <div class="bar" style="height: 55%; animation-delay: 0.2s;"></div>
+                <span class="bar-year">2021</span>
+              </div>
+              <div class="bar-col">
+                <div class="bar" style="height: 62%; animation-delay: 0.25s;"></div>
+                <span class="bar-year">2022</span>
+              </div>
+              <div class="bar-col">
+                <div class="bar" style="height: 70%; animation-delay: 0.3s;"></div>
+                <span class="bar-year">2023</span>
+              </div>
+              <div class="bar-col">
+                <div class="bar" style="height: 82%; animation-delay: 0.35s;"></div>
+                <span class="bar-year">2024</span>
+              </div>
+              <div class="bar-col">
+                <div class="bar" style="height: 100%; animation-delay: 0.4s;"></div>
+                <span class="bar-year">2025</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="terminal-window">
+            <div class="terminal-bar">
+              <span class="window-dot red"></span>
+              <span class="window-dot yellow"></span>
+              <span class="window-dot green"></span>
+              <span class="terminal-title">session — zsh</span>
+            </div>
+
+            <div class="terminal-body">
+              <div><span class="terminal-prompt">$</span> whoami</div>
+              <div><span class="highlight">lucila_corro</span> <span class="comment">// ecologist, spatial analyst</span></div>
+              <div>&nbsp;</div>
+              <div><span class="terminal-prompt">$</span> cat affiliation.txt</div>
+              <div>U.S. Geological Survey</div>
+              <div>&nbsp;</div>
+              <div><span class="terminal-prompt">$</span> ls ./research_focus/</div>
+              <div><span class="path">land_cover_change/</span> <span class="path">urban_ecology/</span></div>
+              <div><span class="path">remote_sensing/</span> <span class="path">conservation_bio/</span></div>
+              <div>&nbsp;</div>
+              <div><span class="terminal-prompt">$</span> ./run_analysis.sh --scale=CONUS</div>
+              <div><span class="ok">✓</span> dataset compiled <span class="comment">// tree canopy, 2025</span></div>
+              <div><span class="terminal-prompt">$</span> <span class="terminal-cursor"></span></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="chart-panel" style="margin-top: 18px;">
+          <div class="chart-panel-header">
+            <h3>Technical stack</h3>
+          </div>
+
+          <div class="stack-panel">
+            <div class="stack-chip">
+              <div class="stack-chip-name">Python <span>92%</span></div>
+              <div class="stack-bar-track"><div class="stack-bar-fill" style="transform: scaleX(0.92); animation-delay: 0.05s;"></div></div>
+            </div>
+            <div class="stack-chip">
+              <div class="stack-chip-name">R <span>85%</span></div>
+              <div class="stack-bar-track"><div class="stack-bar-fill" style="transform: scaleX(0.85); animation-delay: 0.1s;"></div></div>
+            </div>
+            <div class="stack-chip">
+              <div class="stack-chip-name">GIS / ArcPy <span>90%</span></div>
+              <div class="stack-bar-track"><div class="stack-bar-fill" style="transform: scaleX(0.9); animation-delay: 0.15s;"></div></div>
+            </div>
+            <div class="stack-chip">
+              <div class="stack-chip-name">Google Earth Engine <span>80%</span></div>
+              <div class="stack-bar-track"><div class="stack-bar-fill" style="transform: scaleX(0.8); animation-delay: 0.2s;"></div></div>
+            </div>
+            <div class="stack-chip">
+              <div class="stack-chip-name">Remote Sensing <span>88%</span></div>
+              <div class="stack-bar-track"><div class="stack-bar-fill" style="transform: scaleX(0.88); animation-delay: 0.25s;"></div></div>
+            </div>
+            <div class="stack-chip">
+              <div class="stack-chip-name">SQL <span>75%</span></div>
+              <div class="stack-bar-track"><div class="stack-bar-fill" style="transform: scaleX(0.75); animation-delay: 0.3s;"></div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <section class="section" id="featured-work">
       <div class="page-width">
         <div class="section-heading">
-          <div class="section-index">02 / Featured work</div>
+          <div class="section-index">03 / Featured work</div>
 
           <h2>
             National-scale environmental data built for practical use.
@@ -1043,7 +1544,7 @@
     <section class="section">
       <div class="page-width">
         <div class="section-heading">
-          <div class="section-index">03 / Capabilities</div>
+          <div class="section-index">04 / Capabilities</div>
 
           <h2>
             Technical work grounded in environmental science.
@@ -1113,7 +1614,7 @@
     <section class="section">
       <div class="page-width">
         <div class="section-heading">
-          <div class="section-index">04 / Research update</div>
+          <div class="section-index">05 / Research update</div>
 
           <h2>
             Recent work and professional updates.
