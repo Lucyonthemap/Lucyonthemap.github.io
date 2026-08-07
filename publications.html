@@ -1,158 +1,889 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Publications - Lucila Corro MS</title>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <meta
+    name="description"
+    content="Peer-reviewed publications and scholarly work of Lucila M. Corro, an ecologist, spatial analyst, and geospatial data scientist."
+  >
+
+  <title>Publications | Lucila M. Corro, M.S.</title>
+
   <style>
+    :root {
+      --background: #050a10;
+      --background-soft: #0b1722;
+      --panel: rgba(14, 29, 41, 0.78);
+      --panel-solid: #0e1d29;
+      --panel-light: #132838;
+      --text: #eef7fb;
+      --text-soft: #a8bbc7;
+      --text-muted: #728896;
+      --cyan: #5ce1e6;
+      --cyan-soft: rgba(92, 225, 230, 0.12);
+      --blue: #57a7ff;
+      --green: #74e0a7;
+      --amber: #f5c26b;
+      --pink: #ff8fd6;
+      --border: rgba(130, 194, 218, 0.16);
+      --border-bright: rgba(92, 225, 230, 0.34);
+      --shadow: 0 28px 80px rgba(0, 0, 0, 0.36);
+      --radius-large: 28px;
+      --radius-medium: 18px;
+      --page-width: 1180px;
+      --mono:
+        "SFMono-Regular",
+        Consolas,
+        "Liberation Mono",
+        Menlo,
+        monospace;
+      --sans:
+        Inter,
+        ui-sans-serif,
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
-      font-family: 'Roboto', Arial, sans-serif;
       margin: 0;
-      padding: 0;
-      background-color: #f8f9fa;
-      background-image: url('IMG_0260 - Copy.JPG');
-      background-size: cover;
-      background-position: center;
-      background-attachment: fixed;
-      background-repeat: no-repeat;
-      color: #333;
-      line-height: 1.6;
+      color: var(--text);
+      background:
+        linear-gradient(rgba(92, 225, 230, 0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(92, 225, 230, 0.035) 1px, transparent 1px),
+        radial-gradient(
+          circle at 85% 8%,
+          rgba(43, 126, 168, 0.18),
+          transparent 34rem
+        ),
+        var(--background);
+      background-size:
+        42px 42px,
+        42px 42px,
+        auto,
+        auto;
+      font-family: var(--sans);
+      line-height: 1.7;
+      position: relative;
+      overflow-x: hidden;
     }
 
-    header {
-      background-color: #2c3e50;
-      color: white;
-      padding: 1rem 0;
-      text-align: center;
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+      background:
+        radial-gradient(
+          circle at 15% 35%,
+          rgba(39, 94, 123, 0.13),
+          transparent 28rem
+        );
     }
 
-    nav {
-      background-color: #34495e;
-      padding: 0.5rem 0;
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: 999;
+      pointer-events: none;
+      background: repeating-linear-gradient(
+        to bottom,
+        rgba(255, 255, 255, 0.012) 0px,
+        rgba(255, 255, 255, 0.012) 1px,
+        transparent 1px,
+        transparent 3px
+      );
+      opacity: 0.5;
+      mix-blend-mode: overlay;
     }
 
-    nav ul {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-      display: flex;
-      justify-content: center;
-      gap: 2rem;
-    }
-
-    nav ul li a {
-      color: white;
-      text-decoration: none;
-      font-weight: 500;
-      padding: 0.5rem 1rem;
-      transition: background-color 0.3s;
-    }
-
-    nav ul li a:hover {
-      background-color: #4a6076;
-      border-radius: 5px;
-    }
-
-    .container {
-      max-width: 900px;
-      margin: 2rem auto;
-      background-color: rgba(44, 62, 80, 0.7);
-      padding: 2rem;
-      border-radius: 8px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-      color: white;
-    }
-
-    .profile-section {
-      margin-top: 2rem;
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 2rem;
-    }
-
-    .profile-button {
-      padding: 0.75rem 1.5rem;
-      background-color: #2980b9;
-      color: white;
-      text-decoration: none;
-      font-weight: bold;
-      border-radius: 6px;
-      transition: background-color 0.3s ease;
-    }
-
-    .profile-button:hover {
-      background-color: #3498db;
-    }
-
-    footer {
-      text-align: center;
-      padding: 1rem 0;
-      background-color: #2c3e50;
-      color: white;
-      margin-top: 2rem;
-    }
-
-    ul {
-      padding-left: 1.2rem;
+    img,
+    iframe {
+      max-width: 100%;
     }
 
     a {
-      color: #add8e6;
+      color: inherit;
+    }
+
+    .page-width {
+      width: min(var(--page-width), calc(100% - 44px));
+      margin: 0 auto;
+    }
+
+    .site-nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-bottom: 1px solid var(--border);
+      background: rgba(5, 10, 16, 0.82);
+      backdrop-filter: blur(18px);
+    }
+
+    .nav-inner {
+      min-height: 74px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 30px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+
+    .brand-mark {
+      display: grid;
+      place-items: center;
+      width: 38px;
+      height: 38px;
+      border: 1px solid var(--border-bright);
+      border-radius: 10px;
+      color: var(--cyan);
+      background: var(--cyan-soft);
+      font-family: var(--mono);
+      font-size: 0.88rem;
+      font-weight: 700;
+    }
+
+    .brand-name {
+      font-size: 0.96rem;
+      font-weight: 750;
+      letter-spacing: -0.01em;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .nav-links a {
+      display: block;
+      padding: 9px 13px;
+      color: var(--text-soft);
+      border-radius: 9px;
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      text-decoration: none;
+      transition:
+        color 160ms ease,
+        background-color 160ms ease;
+    }
+
+    .nav-links a:hover,
+    .nav-links a:focus-visible,
+    .nav-links a[aria-current="page"] {
+      color: var(--cyan);
+      background: var(--cyan-soft);
+    }
+
+    .page-header {
+      padding-top: 70px;
+      padding-bottom: 56px;
+    }
+
+    .status-line {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 24px;
+      padding: 8px 12px;
+      color: var(--green);
+      border: 1px solid rgba(116, 224, 167, 0.22);
+      border-radius: 999px;
+      background: rgba(116, 224, 167, 0.07);
+      font-family: var(--mono);
+      font-size: 0.76rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--green);
+      box-shadow: 0 0 14px rgba(116, 224, 167, 0.7);
+      animation: pulse-dot 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.85); }
+    }
+
+    .page-header h1 {
+      max-width: 780px;
+      margin: 0;
+      font-size: clamp(2.8rem, 6vw, 5rem);
+      line-height: 0.98;
+      letter-spacing: -0.05em;
+    }
+
+    .page-header h1 span {
+      display: block;
+      color: var(--cyan);
+    }
+
+    .page-intro {
+      max-width: 680px;
+      margin: 26px 0 0;
+      color: var(--text-soft);
+      font-size: clamp(1.04rem, 1.6vw, 1.2rem);
+    }
+
+    .terminal-line {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 22px;
+      color: var(--cyan);
+      font-family: var(--mono);
+      font-size: 0.92rem;
+    }
+
+    .terminal-prompt {
+      color: var(--text-muted);
+    }
+
+    .terminal-cursor {
+      display: inline-block;
+      width: 8px;
+      height: 1.1em;
+      background: var(--cyan);
+      animation: blink 1s steps(1) infinite;
+      vertical-align: middle;
+    }
+
+    @keyframes blink {
+      50% { opacity: 0; }
+    }
+
+    .profile-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 34px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      min-height: 48px;
+      padding: 0 19px;
+      border: 1px solid var(--border);
+      border-radius: 11px;
+      font-family: var(--mono);
+      font-size: 0.82rem;
+      font-weight: 700;
+      text-decoration: none;
+      transition:
+        transform 160ms ease,
+        background-color 160ms ease,
+        border-color 160ms ease,
+        box-shadow 160ms ease;
+    }
+
+    .button-primary {
+      color: #031014;
+      border-color: var(--cyan);
+      background: var(--cyan);
+      box-shadow: 0 12px 32px rgba(92, 225, 230, 0.18);
+    }
+
+    .button-secondary {
+      color: var(--text);
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .button:hover {
+      transform: translateY(-2px);
+    }
+
+    .button-primary:hover {
+      box-shadow: 0 16px 38px rgba(92, 225, 230, 0.28);
+    }
+
+    .button-secondary:hover {
+      color: var(--cyan);
+      border-color: var(--border-bright);
+      background: var(--cyan-soft);
+    }
+
+    .section {
+      padding: 72px 0;
+      border-top: 1px solid var(--border);
+      position: relative;
+    }
+
+    .section-heading {
+      display: grid;
+      grid-template-columns: 180px minmax(0, 1fr);
+      gap: 36px;
+      margin-bottom: 40px;
+    }
+
+    .section-index {
+      padding-top: 7px;
+      color: var(--cyan);
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .section-heading h2 {
+      max-width: 760px;
+      margin: 0;
+      font-size: clamp(2rem, 4.4vw, 3.4rem);
+      line-height: 1.06;
+      letter-spacing: -0.04em;
+    }
+
+    .stat-panel,
+    .pub-card,
+    .content-panel {
+      border: 1px solid var(--border);
+      background: var(--panel);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(16px);
+    }
+
+    .content-panel {
+      padding: 34px;
+      border-radius: var(--radius-large);
+    }
+
+    .content-panel p {
+      margin: 0 0 20px;
+      color: var(--text-soft);
+      font-size: 1.04rem;
+    }
+
+    .content-panel p:last-child {
+      margin-bottom: 0;
+    }
+
+    .dashboard-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+      margin-bottom: 8px;
+    }
+
+    .stat-panel {
+      padding: 22px;
+      border-radius: var(--radius-medium);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .stat-panel::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--cyan), transparent);
+    }
+
+    .stat-label {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 14px;
+      color: var(--text-muted);
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .stat-trend {
+      color: var(--green);
+      font-size: 0.66rem;
+    }
+
+    .stat-value {
+      color: var(--text);
+      font-family: var(--mono);
+      font-size: 2.1rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1;
+    }
+
+    .stat-value span {
+      color: var(--cyan);
+    }
+
+    .pub-list {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .pub-card {
+      padding: 24px 26px;
+      border-radius: var(--radius-medium);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .pub-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      width: 3px;
+      background: linear-gradient(180deg, var(--cyan), transparent);
+    }
+
+    .pub-year {
+      display: inline-block;
+      margin-bottom: 10px;
+      padding: 5px 10px;
+      color: var(--cyan);
+      border: 1px solid var(--border-bright);
+      border-radius: 999px;
+      background: var(--cyan-soft);
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.05em;
+    }
+
+    .pub-title {
+      margin: 0 0 8px;
+      color: var(--text);
+      font-size: 1.04rem;
+      line-height: 1.55;
+    }
+
+    .pub-title b {
+      color: var(--cyan);
+    }
+
+    .pub-venue {
+      margin: 0 0 12px;
+      color: var(--text-muted);
+      font-family: var(--mono);
+      font-size: 0.82rem;
+    }
+
+    .pub-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      color: var(--blue);
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      text-decoration: none;
+    }
+
+    .pub-link:hover {
+      color: var(--cyan);
+      text-decoration: underline;
+    }
+
+    .prep-card {
+      padding: 24px 26px;
+      border-radius: var(--radius-medium);
+      color: var(--text-soft);
+      font-size: 0.98rem;
+      line-height: 1.7;
+    }
+
+    .site-footer {
+      padding: 38px 0;
+      color: var(--text-muted);
+      border-top: 1px solid var(--border);
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      font-family: var(--mono);
+      font-size: 0.72rem;
+    }
+
+    .footer-accent {
+      color: var(--cyan);
+    }
+
+    a:focus-visible {
+      outline: 3px solid rgba(92, 225, 230, 0.34);
+      outline-offset: 4px;
+    }
+
+    @media (max-width: 960px) {
+      .dashboard-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 700px) {
+      .page-width {
+        width: min(var(--page-width), calc(100% - 26px));
+      }
+
+      .nav-inner {
+        min-height: 66px;
+      }
+
+      .brand-name {
+        display: none;
+      }
+
+      .nav-links {
+        overflow-x: auto;
+      }
+
+      .nav-links a {
+        padding-inline: 9px;
+        font-size: 0.7rem;
+      }
+
+      .page-header {
+        padding-top: 54px;
+        padding-bottom: 44px;
+      }
+
+      .profile-actions {
+        display: grid;
+      }
+
+      .button {
+        width: 100%;
+      }
+
+      .section {
+        padding: 56px 0;
+      }
+
+      .section-heading {
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+
+      .content-panel,
+      .pub-card,
+      .prep-card {
+        padding: 20px;
+      }
+
+      .dashboard-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-inner {
+        flex-direction: column;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      *,
+      *::before,
+      *::after {
+        transition: none !important;
+      }
+
+      .status-dot,
+      .terminal-cursor {
+        animation: none !important;
+      }
     }
   </style>
 </head>
+
 <body>
-  <div style="position: fixed; inset: 0; background-color: rgba(255,255,255,0.6); z-index: -1;"></div>
+  <nav class="site-nav" aria-label="Primary navigation">
+    <div class="page-width nav-inner">
+      <a class="brand" href="index.html">
+        <span class="brand-mark">&lt;LC/&gt;</span>
+        <span class="brand-name">Lucila M. Corro</span>
+      </a>
 
-  <header>
-    <h1>Lucila Corro MS</h1>
-    <p>Publications</p>
-  </header>
-
-  <nav>
-    <ul>
-      <li><a href="index.html">Home</a></li>
-      <li><a href="research.html">Research</a></li>
-      <li><a href="publications.html">Publications</a></li>
-      <li><a href="contact.html">Contact</a></li>
-    </ul>
+      <ul class="nav-links">
+        <li><a href="index.html">01_HOME</a></li>
+        <li><a href="index.html#dashboard">02_DASHBOARD</a></li>
+        <li><a href="research.html">03_RESEARCH</a></li>
+        <li><a href="publications.html" aria-current="page">04_PUBLICATIONS</a></li>
+        <li><a href="contact.html">05_CONTACT</a></li>
+      </ul>
+    </div>
   </nav>
 
-  <div class="container">
-    <h2>Explore My Scholarly Work</h2>
-    <p>Click below to view my latest publications, research collaborations, and academic impact:</p>
-    <div class="profile-section">
-      <a class="profile-button" href="https://scholar.google.com/citations?user=OZBqP2kAAAAJ&hl=en" target="_blank">
-        Google Scholar Profile
-      </a>
-      <a class="profile-button" href="https://www.researchgate.net/profile/Lucila-Corro?ev=hdr_xprf" target="_blank">
-        ResearchGate Profile
-      </a>
+  <main>
+    <header class="page-width page-header">
+      <div class="status-line">
+        <span class="status-dot"></span>
+        Peer-reviewed + in preparation
+      </div>
+
+      <h1>
+        Publications
+        <span>Scholarly work and academic impact.</span>
+      </h1>
+
+      <p class="page-intro">
+        Peer-reviewed studies, data releases, and ongoing manuscripts
+        spanning urban ecology, remote sensing, land-cover change, and
+        wildlife science.
+      </p>
+
+      <div class="terminal-line">
+        <span class="terminal-prompt">$</span>
+        <span>cat publications.bib | grep -c "author"</span>
+        <span class="terminal-cursor"></span>
+      </div>
+
+      <div class="profile-actions">
+        <a
+          class="button button-primary"
+          href="https://scholar.google.com/citations?user=OZBqP2kAAAAJ&hl=en"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Google Scholar profile
+          <span aria-hidden="true">↗</span>
+        </a>
+
+        <a
+          class="button button-secondary"
+          href="https://www.researchgate.net/profile/Lucila-Corro?ev=hdr_xprf"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          ResearchGate profile
+          <span aria-hidden="true">↗</span>
+        </a>
+      </div>
+    </header>
+
+    <section class="section" id="overview">
+      <div class="page-width">
+        <div class="dashboard-grid">
+          <div class="stat-panel">
+            <div class="stat-label">
+              <span>Peer-reviewed</span>
+              <span class="stat-trend">▲ active</span>
+            </div>
+            <div class="stat-value"><span>8</span></div>
+          </div>
+
+          <div class="stat-panel">
+            <div class="stat-label">
+              <span>Lead-author</span>
+              <span class="stat-trend">since 2017</span>
+            </div>
+            <div class="stat-value"><span>3</span></div>
+          </div>
+
+          <div class="stat-panel">
+            <div class="stat-label">
+              <span>In preparation</span>
+              <span class="stat-trend">upcoming</span>
+            </div>
+            <div class="stat-value"><span>1</span></div>
+          </div>
+
+          <div class="stat-panel">
+            <div class="stat-label">
+              <span>Span</span>
+              <span class="stat-trend">2017–2026</span>
+            </div>
+            <div class="stat-value"><span>9</span> yrs</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="peer-reviewed">
+      <div class="page-width">
+        <div class="section-heading">
+          <div class="section-index">01 / Peer-reviewed</div>
+          <h2>Published studies and data releases.</h2>
+        </div>
+
+        <div class="pub-list">
+          <article class="pub-card">
+            <span class="pub-year">2025</span>
+            <p class="pub-title">
+              <b>Corro, L.M.</b>, Bagstad, K.J., Heris, M.P. et al. An
+              enhanced national-scale urban tree canopy cover dataset
+              for the United States.
+            </p>
+            <p class="pub-venue">Scientific Data, 12, 490 (2025)</p>
+            <a class="pub-link" href="https://doi.org/10.1038/s41597-025-04816-0" target="_blank" rel="noopener noreferrer">
+              DOI ↗
+            </a>
+          </article>
+
+          <article class="pub-card">
+            <span class="pub-year">2025</span>
+            <p class="pub-title">
+              Ibsen, P. C., Bierbrauer, A., <b>Corro, L. M.</b>, Ancona,
+              Z. H., Drummond, M., Bagstad, K. J., &amp; Diffendorfer,
+              J. E. (2025). Land-use and socioeconomic time-series
+              reveal legacy of redlining on present-day gentrification
+              within a growing United States city.
+            </p>
+            <p class="pub-venue">PloS ONE, 20(3), e0317988</p>
+            <a class="pub-link" href="https://doi.org/10.1371/journal.pone.0317988" target="_blank" rel="noopener noreferrer">
+              DOI ↗
+            </a>
+          </article>
+
+          <article class="pub-card">
+            <span class="pub-year">2024</span>
+            <p class="pub-title">
+              Ibsen, P. C., Crawford, B. R., <b>Corro, L. M.</b>,
+              Bagstad, K. J., McNellis, B. E., Jenerette, G. D., &amp;
+              Diffendorfer, J. E. (2024). Urban tree cover provides
+              consistent mitigation of extreme heat in arid but not
+              humid cities.
+            </p>
+            <p class="pub-venue">Sustainable Cities and Society, 113, 105677</p>
+            <a class="pub-link" href="https://doi.org/10.1016/j.scs.2024.105677" target="_blank" rel="noopener noreferrer">
+              DOI ↗
+            </a>
+          </article>
+
+          <article class="pub-card">
+            <span class="pub-year">2024</span>
+            <p class="pub-title">
+              Diffendorfer, J.E., Botello, F., Drummond, M.A., Ancona,
+              Z.A., <b>Corro, L.M.</b>, et al. (2024). Changes in
+              landscape and climate in Mexico and Texas reveal small
+              effects on migratory habitat of monarch butterflies.
+            </p>
+            <p class="pub-venue">Scientific Reports, 14, 6703</p>
+            <a class="pub-link" href="https://doi.org/10.1038/s41598-024-56693-z" target="_blank" rel="noopener noreferrer">
+              DOI ↗
+            </a>
+          </article>
+
+          <article class="pub-card">
+            <span class="pub-year">2021</span>
+            <p class="pub-title">
+              Corro, L. (2021). A look at land cover classification
+              methods in Northern California with the use of high
+              spatial resolution geospatial data.
+            </p>
+            <p class="pub-venue">Cal Poly Humboldt Theses and Projects, 488</p>
+            <a class="pub-link" href="https://digitalcommons.humboldt.edu/etd/488" target="_blank" rel="noopener noreferrer">
+              DOI ↗
+            </a>
+          </article>
+
+          <article class="pub-card">
+            <span class="pub-year">2020</span>
+            <p class="pub-title">
+              Madurapperuma, B. D., Kahara, S. N., Hernandez, K. B.,
+              &amp; <b>Corro, L. M.</b> (2020). High-Resolution Data
+              for Capturing Wetland Vegetation Using Object-Based
+              Classification Methods.
+            </p>
+            <p class="pub-venue">Conference Paper, First Annual Research Session</p>
+            <a class="pub-link" href="https://www.researchgate.net/publication/346556996_High-resolution_data_for_capturing_wetland_vegetation_using_object-based_classification_methods" target="_blank" rel="noopener noreferrer">
+              Text ↗
+            </a>
+          </article>
+
+          <article class="pub-card">
+            <span class="pub-year">2020</span>
+            <p class="pub-title">
+              Madurapperuma, B., Lamping, J., McDermott, M., Murphy,
+              B., McFarland, J., et al. (2020). Factors Influencing
+              Movement of the Manila Dunes and Its Impact on
+              Establishing Non-Native Species.
+            </p>
+            <p class="pub-venue">Remote Sensing, 12(10), 1536</p>
+            <a class="pub-link" href="https://doi.org/10.3390/rs12101536" target="_blank" rel="noopener noreferrer">
+              DOI ↗
+            </a>
+          </article>
+
+          <article class="pub-card">
+            <span class="pub-year">2017</span>
+            <p class="pub-title">
+              <b>Corro, L. M.</b>, Tripp, D. W., Stelting, S. A., &amp;
+              Miller, M. W. (2017). Using Off-the-Shelf Technologies to
+              Mass Manufacture Oral Vaccine Baits for Wildlife.
+            </p>
+            <p class="pub-venue">Journal of Wildlife Diseases, 53(3), 681–685</p>
+            <a class="pub-link" href="https://doi.org/10.7589/2017-01-013" target="_blank" rel="noopener noreferrer">
+              DOI ↗
+            </a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="in-preparation">
+      <div class="page-width">
+        <div class="section-heading">
+          <div class="section-index">02 / In preparation</div>
+          <h2>Manuscripts underway.</h2>
+        </div>
+
+        <div class="prep-card">
+          <span class="pub-year">2026</span>
+          <p style="margin: 12px 0 0;">
+            Zach Ancona, Kenneth Bagstad, Greg Cermak, Lucila Corro,
+            Jay Diffendorfer, Peter Ibsen, Levi Sweet-Breu, Mehdi
+            Heris, Libby Kula, Raimundo Atal, Leon Foks, Eric
+            Lonsdorf, Dave Nowak (2026) Building second-generation
+            urban ecosystem accounts for the United States. In prep
+            for <i>NPJ Urban Sustainability</i>.
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="page-width footer-inner">
+      <span>&copy; 2026 Lucila M. Corro</span>
+      <span>
+        Built with
+        <span class="footer-accent">data + code + ecology</span>
+      </span>
     </div>
-
-    <hr style="margin: 3rem 0; border: none; border-top: 1px solid #ccc;">
-
-    <h2>Peer-Reviewed Publications</h2>
-    <ul style="line-height: 1.8;">
-      <li><b>Corro, L.M.</b>, Bagstad, K.J., Heris, M.P. <i>et al</i>. An enhanced national-scale urban tree canopy cover dataset for the United States. <i>Sci Data </i> <b> 12</b>, 490 (2025).<a href="https://doi.org/10.1038/s41597-025-04816-0" target="_blank">DOI</a></li>
-      <li>Ibsen, P. C., Bierbrauer, A., <b>Corro, L. M.</b>, Ancona, Z. H., Drummond, M., Bagstad, K. J., & Diffendorfer, J. E. (2025). Land-use and socioeconomic time-series reveal legacy of redlining on present-day gentrification within a growing United States city. <i>PloS ONE, 20</i>(3), e0317988.<a href="https://doi.org/10.1371/journal.pone.0317988" target="_blank">DOI</a></li>
-      <li>Ibsen, P. C., Crawford, B. R., <b>Corro, L. M.</b>, Bagstad, K. J., McNellis, B. E., Jenerette, G. D., & Diffendorfer, J. E. (2024). Urban tree cover provides consistent mitigation of extreme heat in arid but not humid cities. <i>Sustainable Cities and Society, 113</i>, 105677. <a href="https://doi.org/10.1016/j.scs.2024.105677" target="_blank">DOI</a></li>
-      <li>Diffendorfer, J.E., Botello, F., Drummond, M.A., Ancona, Z.A., <b>Corro, L.M.</b>, et al. (2024). Changes in landscape and climate in Mexico and Texas reveal small effects on migratory habitat of monarch butterflies. <i>Scientific Reports, 14</i>, 6703. <a href="https://doi.org/10.1038/s41598-024-56693-z" target="_blank">DOI</a></li>
-      <li>Corro, L. (2021). A look at land cover classification methods in Northern California with the use of high spatial resolution geospatial data. <i>Cal Poly Humboldt Theses and Projects, 488</i>. <a href="https://digitalcommons.humboldt.edu/etd/488" target="_blank">DOI</a></li>
-      <li>Madurapperuma, B. D., Kahara, S. N., Hernandez, K. B., & <b>Corro, L. M.</b> (2020). High-Resolution Data for Capturing Wetland Vegetation Using Object-Based Classification Methods. <i>Conference Paper, First Annual Research Session</i>.<a href="https://www.researchgate.net/publication/346556996_High-resolution_data_for_capturing_wetland_vegetation_using_object-based_classification_methods" target="_blank">Text</a></li>
-      <li>Madurapperuma, B., Lamping, J., McDermott, M., Murphy, B., McFarland, J., et al. (2020). Factors Influencing Movement of the Manila Dunes and Its Impact on Establishing Non-Native Species. <i>Remote Sensing, 12</i>(10), 1536.<a href="https://doi.org/10.3390/rs12101536" target="_blank">DOI</a></li>
-      <li><b>Corro, L. M.</b>, Tripp, D. W., Stelting, S. A., & Miller, M. W. (2017). Using Off-the-Shelf Technologies to Mass Manufacture Oral Vaccine Baits for Wildlife. <i>Journal of Wildlife Diseases, 53</i>(3), 681–685. <a href="https://doi.org/10.7589/2017-01-013" target="_blank">DOI</a></li>
-    </ul>
-
-    <h2>Publications in Preparation</h2>
-    <ul style="line-height: 1.8;">
-      <li>Zach Ancona, Kenneth Bagstad, Greg Cermak, Lucila Corro, Jay Diffendorfer, Peter Ibsen, Levi Sweet-Breu, Mehdi Heris, Libby Kula, Raimundo Atal, Leon Foks, Eric Lonsdorf, Dave Nowak (2026) Building second-generation urban ecosystem accounts for the United States. In Prep for NPJ Urban Sustainability</li>
-    </ul>
-  </div>
-
-  <footer>
-    <p>&copy; 2025 Lucila M. Corro. All rights reserved.</p>
   </footer>
 </body>
 </html>
