@@ -1,153 +1,872 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Research - Lucila Corro MS</title>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <meta
+    name="description"
+    content="Research overview of Lucila M. Corro, an ecologist, spatial analyst, and geospatial data scientist."
+  >
+
+  <title>Research | Lucila M. Corro, M.S.</title>
+
   <style>
+    :root {
+      --background: #050a10;
+      --background-soft: #0b1722;
+      --panel: rgba(14, 29, 41, 0.78);
+      --panel-solid: #0e1d29;
+      --panel-light: #132838;
+      --text: #eef7fb;
+      --text-soft: #a8bbc7;
+      --text-muted: #728896;
+      --cyan: #5ce1e6;
+      --cyan-soft: rgba(92, 225, 230, 0.12);
+      --blue: #57a7ff;
+      --green: #74e0a7;
+      --amber: #f5c26b;
+      --pink: #ff8fd6;
+      --border: rgba(130, 194, 218, 0.16);
+      --border-bright: rgba(92, 225, 230, 0.34);
+      --shadow: 0 28px 80px rgba(0, 0, 0, 0.36);
+      --radius-large: 28px;
+      --radius-medium: 18px;
+      --page-width: 1180px;
+      --mono:
+        "SFMono-Regular",
+        Consolas,
+        "Liberation Mono",
+        Menlo,
+        monospace;
+      --sans:
+        Inter,
+        ui-sans-serif,
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
-      font-family: 'Roboto', Arial, sans-serif;
       margin: 0;
-      padding: 0;
-      background-color: #f8f9fa;
-      background-image: url('IMG_0260 - Copy.JPG');
-      background-size: cover;
-      background-position: center;
-      background-attachment: fixed;
-      background-repeat: no-repeat;
-      color: #333;
-      line-height: 1.6;
+      color: var(--text);
+      background:
+        linear-gradient(rgba(92, 225, 230, 0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(92, 225, 230, 0.035) 1px, transparent 1px),
+        radial-gradient(
+          circle at 85% 8%,
+          rgba(43, 126, 168, 0.18),
+          transparent 34rem
+        ),
+        var(--background);
+      background-size:
+        42px 42px,
+        42px 42px,
+        auto,
+        auto;
+      font-family: var(--sans);
+      line-height: 1.7;
+      position: relative;
+      overflow-x: hidden;
     }
 
-    header {
-      background-color: #2c3e50;
-      color: white;
-      padding: 1rem 0;
-      text-align: center;
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+      background:
+        radial-gradient(
+          circle at 15% 35%,
+          rgba(39, 94, 123, 0.13),
+          transparent 28rem
+        );
     }
 
-    nav {
-      background-color: #34495e;
-      padding: 0.5rem 0;
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: 999;
+      pointer-events: none;
+      background: repeating-linear-gradient(
+        to bottom,
+        rgba(255, 255, 255, 0.012) 0px,
+        rgba(255, 255, 255, 0.012) 1px,
+        transparent 1px,
+        transparent 3px
+      );
+      opacity: 0.5;
+      mix-blend-mode: overlay;
     }
 
-    nav ul {
-      list-style: none;
-      padding: 0;
-      margin: 0;
+    img,
+    iframe {
+      max-width: 100%;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    .page-width {
+      width: min(var(--page-width), calc(100% - 44px));
+      margin: 0 auto;
+    }
+
+    .site-nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-bottom: 1px solid var(--border);
+      background: rgba(5, 10, 16, 0.82);
+      backdrop-filter: blur(18px);
+    }
+
+    .nav-inner {
+      min-height: 74px;
       display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 30px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+
+    .brand-mark {
+      display: grid;
+      place-items: center;
+      width: 38px;
+      height: 38px;
+      border: 1px solid var(--border-bright);
+      border-radius: 10px;
+      color: var(--cyan);
+      background: var(--cyan-soft);
+      font-family: var(--mono);
+      font-size: 0.88rem;
+      font-weight: 700;
+    }
+
+    .brand-name {
+      font-size: 0.96rem;
+      font-weight: 750;
+      letter-spacing: -0.01em;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .nav-links a {
+      display: block;
+      padding: 9px 13px;
+      color: var(--text-soft);
+      border-radius: 9px;
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      text-decoration: none;
+      transition:
+        color 160ms ease,
+        background-color 160ms ease;
+    }
+
+    .nav-links a:hover,
+    .nav-links a:focus-visible,
+    .nav-links a[aria-current="page"] {
+      color: var(--cyan);
+      background: var(--cyan-soft);
+    }
+
+    .page-header {
+      padding-top: 70px;
+      padding-bottom: 56px;
+    }
+
+    .status-line {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 24px;
+      padding: 8px 12px;
+      color: var(--green);
+      border: 1px solid rgba(116, 224, 167, 0.22);
+      border-radius: 999px;
+      background: rgba(116, 224, 167, 0.07);
+      font-family: var(--mono);
+      font-size: 0.76rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--green);
+      box-shadow: 0 0 14px rgba(116, 224, 167, 0.7);
+      animation: pulse-dot 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.85); }
+    }
+
+    .page-header h1 {
+      max-width: 780px;
+      margin: 0;
+      font-size: clamp(2.8rem, 6vw, 5rem);
+      line-height: 0.98;
+      letter-spacing: -0.05em;
+    }
+
+    .page-header h1 span {
+      display: block;
+      color: var(--cyan);
+    }
+
+    .page-intro {
+      max-width: 680px;
+      margin: 26px 0 0;
+      color: var(--text-soft);
+      font-size: clamp(1.04rem, 1.6vw, 1.2rem);
+    }
+
+    .terminal-line {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 22px;
+      color: var(--cyan);
+      font-family: var(--mono);
+      font-size: 0.92rem;
+    }
+
+    .terminal-prompt {
+      color: var(--text-muted);
+    }
+
+    .terminal-cursor {
+      display: inline-block;
+      width: 8px;
+      height: 1.1em;
+      background: var(--cyan);
+      animation: blink 1s steps(1) infinite;
+      vertical-align: middle;
+    }
+
+    @keyframes blink {
+      50% { opacity: 0; }
+    }
+
+    .section {
+      padding: 72px 0;
+      border-top: 1px solid var(--border);
+      position: relative;
+    }
+
+    .section-heading {
+      display: grid;
+      grid-template-columns: 180px minmax(0, 1fr);
+      gap: 36px;
+      margin-bottom: 40px;
+    }
+
+    .section-index {
+      padding-top: 7px;
+      color: var(--cyan);
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .section-heading h2 {
+      max-width: 760px;
+      margin: 0;
+      font-size: clamp(2rem, 4.4vw, 3.4rem);
+      line-height: 1.06;
+      letter-spacing: -0.04em;
+    }
+
+    .content-panel,
+    .code-panel,
+    .embed-card,
+    .dataset-card,
+    .collab-card {
+      border: 1px solid var(--border);
+      background: var(--panel);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(16px);
+    }
+
+    .content-panel {
+      padding: 34px;
+      border-radius: var(--radius-large);
+    }
+
+    .content-panel p {
+      margin: 0 0 20px;
+      color: var(--text-soft);
+      font-size: 1.04rem;
+    }
+
+    .content-panel p:last-child {
+      margin-bottom: 0;
+    }
+
+    .content-panel strong {
+      color: var(--text);
+    }
+
+    .code-panel {
+      overflow: hidden;
+      border-radius: var(--radius-large);
+    }
+
+    .code-bar {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.025);
+    }
+
+    .window-dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      opacity: 0.85;
+    }
+
+    .window-dot.red { background: #ff6b6b; }
+    .window-dot.yellow { background: #f5c26b; }
+    .window-dot.green { background: #74e0a7; }
+
+    .code-title {
+      margin-left: 8px;
+      color: var(--text-muted);
+      font-family: var(--mono);
+      font-size: 0.72rem;
+    }
+
+    .code-content {
+      margin: 0;
+      padding: 26px;
+      overflow-x: auto;
+      color: var(--text-soft);
+      font-family: var(--mono);
+      font-size: 0.82rem;
+      line-height: 1.9;
+      white-space: pre-wrap;
+    }
+
+    .code-key { color: var(--blue); }
+    .code-string { color: var(--green); }
+    .code-bracket { color: var(--cyan); }
+
+    .focus-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-top: 30px;
+    }
+
+    .focus-chip {
+      padding: 18px;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.025);
+    }
+
+    .focus-chip-label {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--cyan);
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .focus-chip span.title {
+      display: block;
+      color: var(--text);
+      font-size: 0.98rem;
+      font-weight: 600;
+    }
+
+    .dataset-list {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .dataset-card {
+      padding: 26px;
+      border-radius: var(--radius-medium);
+    }
+
+    .dataset-card-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-bottom: 6px;
+    }
+
+    .dataset-title {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 1.15rem;
+      font-weight: 650;
+      text-decoration: none;
+      color: var(--text);
+    }
+
+    .dataset-title:hover {
+      color: var(--cyan);
+    }
+
+    .tag {
+      padding: 7px 10px;
+      color: var(--cyan);
+      border: 1px solid var(--border-bright);
+      border-radius: 999px;
+      background: var(--cyan-soft);
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .tag.muted {
+      color: var(--text-muted);
+      border-color: var(--border);
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .dataset-link-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 4px;
+      color: var(--text-muted);
+      font-family: var(--mono);
+      font-size: 0.78rem;
+    }
+
+    .embed-card {
+      overflow: hidden;
+      border-radius: var(--radius-large);
+      margin-top: 18px;
+    }
+
+    .embed-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 18px 22px;
+      border-bottom: 1px solid var(--border);
+      flex-wrap: wrap;
+    }
+
+    .embed-header p {
+      margin: 0;
+      color: var(--text-muted);
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .embed-card iframe {
+      display: block;
+      width: 100%;
+      min-height: 560px;
+      border: 0;
+      background: #ffffff;
+    }
+
+    .collab-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+      gap: 14px;
+      margin-top: 26px;
+    }
+
+    .collab-card {
+      padding: 18px;
+      border-radius: 14px;
+      text-align: center;
+      color: var(--text-soft);
+      font-family: var(--mono);
+      font-size: 0.86rem;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
       justify-content: center;
-      gap: 2rem;
-    }
-
-    nav ul li a {
-      color: white;
+      gap: 10px;
+      min-height: 44px;
+      padding: 0 17px;
+      border: 1px solid var(--border);
+      border-radius: 11px;
+      font-family: var(--mono);
+      font-size: 0.8rem;
+      font-weight: 700;
       text-decoration: none;
-      font-weight: 500;
-      padding: 0.5rem 1rem;
-      transition: background-color 0.3s;
+      transition:
+        transform 160ms ease,
+        background-color 160ms ease,
+        border-color 160ms ease,
+        box-shadow 160ms ease;
     }
 
-    nav ul li a:hover {
-      background-color: #4a6076;
-      border-radius: 5px;
+    .button-primary {
+      color: #031014;
+      border-color: var(--cyan);
+      background: var(--cyan);
+      box-shadow: 0 12px 32px rgba(92, 225, 230, 0.18);
     }
 
-    .container {
-      max-width: 900px;
-      margin: 2rem auto;
-      background-color: rgba(44, 62, 80, 0.7);
-      padding: 2rem;
-      border-radius: 8px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-      color: white;
+    .button-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 16px 38px rgba(92, 225, 230, 0.28);
     }
 
-    .about-text {
-      text-align: left;
-      margin-top: 1rem;
+    .site-footer {
+      padding: 38px 0;
+      color: var(--text-muted);
+      border-top: 1px solid var(--border);
     }
 
-    .about-text h1 {
-      font-size: 2rem;
-      color: #ffffff;
-      text-align: center;
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      font-family: var(--mono);
+      font-size: 0.72rem;
     }
 
-    .about-text h2 {
-      font-size: 1.5rem;
-      color: #add8e6;
-      margin-top: 1.5rem;
+    .footer-accent {
+      color: var(--cyan);
     }
 
-    .about-text p, .about-text ul {
-      font-size: 1.1rem;
-      margin: 0.5rem 0;
-      line-height: 1.8;
+    a:focus-visible {
+      outline: 3px solid rgba(92, 225, 230, 0.34);
+      outline-offset: 4px;
     }
 
-    .about-text a {
-      color: #add8e6;
-      text-decoration: none;
-      font-weight: 500;
+    @media (max-width: 960px) {
+      .focus-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
     }
 
-    .about-text a:hover {
-      text-decoration: underline;
+    @media (max-width: 700px) {
+      .page-width {
+        width: min(var(--page-width), calc(100% - 26px));
+      }
+
+      .nav-inner {
+        min-height: 66px;
+      }
+
+      .brand-name {
+        display: none;
+      }
+
+      .nav-links {
+        overflow-x: auto;
+      }
+
+      .nav-links a {
+        padding-inline: 9px;
+        font-size: 0.7rem;
+      }
+
+      .page-header {
+        padding-top: 54px;
+        padding-bottom: 44px;
+      }
+
+      .section {
+        padding: 56px 0;
+      }
+
+      .section-heading {
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+
+      .content-panel {
+        padding: 24px;
+      }
+
+      .focus-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .dataset-card {
+        padding: 20px;
+      }
+
+      .footer-inner {
+        flex-direction: column;
+      }
     }
 
-    footer {
-      text-align: center;
-      padding: 1rem 0;
-      background-color: #2c3e50;
-      color: white;
-      margin-top: 2rem;
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      *,
+      *::before,
+      *::after {
+        transition: none !important;
+      }
+
+      .status-dot,
+      .terminal-cursor {
+        animation: none !important;
+      }
     }
   </style>
 </head>
+
 <body>
-  <div style="position: fixed; inset: 0; background-color: rgba(255,255,255,0.6); z-index: -1;"></div>
+  <nav class="site-nav" aria-label="Primary navigation">
+    <div class="page-width nav-inner">
+      <a class="brand" href="index.html">
+        <span class="brand-mark">&lt;LC/&gt;</span>
+        <span class="brand-name">Lucila M. Corro</span>
+      </a>
 
-  <header>
-    <h1>Lucila Corro MS</h1>
-    <p>Researcher in Geospatial Analysis, Remote Sensing and Ecology</p>
-  </header>
-
-  <nav>
-    <ul>
-      <li><a href="index.html">Home</a></li>
-      <li><a href="research.html">Research</a></li>
-      <li><a href="publications.html">Publications</a></li>
-      <li><a href="contact.html">Contact</a></li>
-    </ul>
+      <ul class="nav-links">
+        <li><a href="index.html">01_HOME</a></li>
+        <li><a href="index.html#dashboard">02_DASHBOARD</a></li>
+        <li><a href="research.html" aria-current="page">03_RESEARCH</a></li>
+        <li><a href="publications.html">04_PUBLICATIONS</a></li>
+        <li><a href="contact.html">05_CONTACT</a></li>
+      </ul>
+    </div>
   </nav>
 
-  <div class="container">
-    <div class="about-text">
-      <h1>Research</h1>
+  <main>
+    <header class="page-width page-header">
+      <div class="status-line">
+        <span class="status-dot"></span>
+        Active research + open datasets
+      </div>
 
-      <h2>Current Projects</h2>
-      <p>I’m currently working on machine learning applications for urban tree canopy mapping, global burned-area mapping, and natural capital accounting for ecosystem services. My research integrates satellite imagery, high-resolution spatial data, and ecological theory to address pressing environmental challenges.</p>
+      <h1>
+        Research
+        <span>Mapping ecological change at scale.</span>
+      </h1>
 
-      <h2>Datasets</h2>
-      <ul>
-        <li><a href="https://www.sciencebase.gov/catalog/item/662aeb7dd34ea70bd5f0c1dd" target="_blank">Urban Tree Canopy Dataset (2025)</a></li>
-        <iframe 
-          src="https://ee-us-conus-urbantcc.projects.earthengine.app/view/enhanced-national-scale-urban-tree-canopy-cover-2011-map-view"
-          width="100%" 
-          height="600" 
-          style="border: none; border-radius: 8px;">
-        </iframe>
-        <li><a href="#">Global Burned Area (coming soon)</a></li>
-      </ul>
+      <p class="page-intro">
+        My work integrates satellite imagery, high-resolution spatial
+        data, and ecological theory to address pressing environmental
+        challenges — from urban tree canopy to global burned-area
+        mapping and natural capital accounting.
+      </p>
 
-      <h2>Collaborations</h2>
-      <p>I collaborate with the U.S. Forest Service (USFS), Colorado State University, City University of New York, University of Colorado–Denver, and other partners to model and map ecological data, develop open-source tools, and publish spatial products that support science-informed decision-making.</p>
+      <div class="terminal-line">
+        <span class="terminal-prompt">$</span>
+        <span>cd ~/research &amp;&amp; ls</span>
+        <span class="terminal-cursor"></span>
+      </div>
+    </header>
+
+    <section class="section" id="current-projects">
+      <div class="page-width">
+        <div class="section-heading">
+          <div class="section-index">01 / Current projects</div>
+          <h2>Where the work is focused right now.</h2>
+        </div>
+
+        <div class="content-panel">
+          <p>
+            I'm currently working on <strong>machine learning
+            applications for urban tree canopy mapping</strong>,
+            <strong>global burned-area mapping</strong>, and
+            <strong>natural capital accounting</strong> for ecosystem
+            services. My research integrates satellite imagery,
+            high-resolution spatial data, and ecological theory to
+            address pressing environmental challenges.
+          </p>
+
+          <div class="focus-grid">
+            <div class="focus-chip">
+              <span class="focus-chip-label">Focus 01</span>
+              <span class="title">Urban tree canopy mapping</span>
+            </div>
+
+            <div class="focus-chip">
+              <span class="focus-chip-label">Focus 02</span>
+              <span class="title">Global burned-area mapping</span>
+            </div>
+
+            <div class="focus-chip">
+              <span class="focus-chip-label">Focus 03</span>
+              <span class="title">Natural capital accounting</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="datasets">
+      <div class="page-width">
+        <div class="section-heading">
+          <div class="section-index">02 / Datasets</div>
+          <h2>Research-ready geospatial data products.</h2>
+        </div>
+
+        <div class="dataset-list">
+          <div class="dataset-card">
+            <div class="dataset-card-header">
+              <a
+                class="dataset-title"
+                href="https://www.sciencebase.gov/catalog/item/662aeb7dd34ea70bd5f0c1dd"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Urban Tree Canopy Dataset (2025)
+                <span aria-hidden="true">↗</span>
+              </a>
+
+              <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                <span class="tag">CONUS</span>
+                <span class="tag">Data release</span>
+              </div>
+            </div>
+
+            <div class="dataset-link-row">
+              sciencebase.gov
+            </div>
+          </div>
+
+          <div class="dataset-card">
+            <div class="dataset-card-header">
+              <span class="dataset-title" style="color: var(--text-muted);">
+                Global Burned Area
+              </span>
+
+              <span class="tag muted">Coming soon</span>
+            </div>
+
+            <div class="dataset-link-row">
+              in development
+            </div>
+          </div>
+        </div>
+
+        <div class="embed-card">
+          <div class="embed-header">
+            <p>Enhanced national-scale urban tree canopy cover — map view</p>
+            <span class="tag">2011 CONUS</span>
+          </div>
+
+          <iframe
+            src="https://ee-us-conus-urbantcc.projects.earthengine.app/view/enhanced-national-scale-urban-tree-canopy-cover-2011-map-view"
+            title="Enhanced national-scale urban tree canopy cover map viewer"
+            loading="lazy"
+          ></iframe>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="collaborations">
+      <div class="page-width">
+        <div class="section-heading">
+          <div class="section-index">03 / Collaborations</div>
+          <h2>Partners in mapping and modeling ecological data.</h2>
+        </div>
+
+        <div class="content-panel">
+          <p>
+            I collaborate with the <strong>U.S. Forest Service
+            (USFS)</strong>, <strong>Colorado State University</strong>,
+            <strong>City University of New York</strong>,
+            <strong>University of Colorado–Denver</strong>, and other
+            partners to model and map ecological data, develop
+            open-source tools, and publish spatial products that
+            support science-informed decision-making.
+          </p>
+
+          <div class="collab-grid">
+            <div class="collab-card">U.S. Forest Service</div>
+            <div class="collab-card">Colorado State University</div>
+            <div class="collab-card">City University of New York</div>
+            <div class="collab-card">University of Colorado–Denver</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="cta">
+      <div class="page-width">
+        <div class="content-panel" style="display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap;">
+          <div>
+            <p style="margin: 0 0 6px; color: var(--text); font-weight: 650; font-size: 1.1rem;">
+              Want to see published work?
+            </p>
+            <p style="margin: 0;">
+              Browse peer-reviewed publications and lead-author studies.
+            </p>
+          </div>
+
+          <a class="button button-primary" href="publications.html">
+            View publications
+            <span aria-hidden="true">→</span>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="page-width footer-inner">
+      <span>&copy; 2026 Lucila M. Corro</span>
+      <span>
+        Built with
+        <span class="footer-accent">data + code + ecology</span>
+      </span>
     </div>
-  </div>
-
-  <footer>
-    <p>&copy; 2025 Lucila M. Corro. All rights reserved.</p>
   </footer>
 </body>
 </html>
