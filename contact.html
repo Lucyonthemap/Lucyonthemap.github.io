@@ -1,142 +1,763 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Contact - Lucila Corro MS</title>
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <meta
+    name="description"
+    content="Contact Lucila M. Corro, an ecologist, spatial analyst, and geospatial data scientist."
+  >
+
+  <title>Contact | Lucila M. Corro, M.S.</title>
+
   <style>
+    :root {
+      --background: #050a10;
+      --background-soft: #0b1722;
+      --panel: rgba(14, 29, 41, 0.78);
+      --panel-solid: #0e1d29;
+      --panel-light: #132838;
+      --text: #eef7fb;
+      --text-soft: #a8bbc7;
+      --text-muted: #728896;
+      --cyan: #5ce1e6;
+      --cyan-soft: rgba(92, 225, 230, 0.12);
+      --blue: #57a7ff;
+      --green: #74e0a7;
+      --amber: #f5c26b;
+      --pink: #ff8fd6;
+      --border: rgba(130, 194, 218, 0.16);
+      --border-bright: rgba(92, 225, 230, 0.34);
+      --shadow: 0 28px 80px rgba(0, 0, 0, 0.36);
+      --radius-large: 28px;
+      --radius-medium: 18px;
+      --page-width: 1180px;
+      --mono:
+        "SFMono-Regular",
+        Consolas,
+        "Liberation Mono",
+        Menlo,
+        monospace;
+      --sans:
+        Inter,
+        ui-sans-serif,
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
-      font-family: 'Roboto', Arial, sans-serif;
       margin: 0;
-      padding: 0;
-      background-color: #f8f9fa;
-      background-image: url('IMG_0260 - Copy.JPG');
-      background-size: cover;
-      background-position: center;
-      background-attachment: fixed;
-      background-repeat: no-repeat;
-      color: #333;
-      line-height: 1.6;
+      color: var(--text);
+      background:
+        linear-gradient(rgba(92, 225, 230, 0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(92, 225, 230, 0.035) 1px, transparent 1px),
+        radial-gradient(
+          circle at 85% 8%,
+          rgba(43, 126, 168, 0.18),
+          transparent 34rem
+        ),
+        var(--background);
+      background-size:
+        42px 42px,
+        42px 42px,
+        auto,
+        auto;
+      font-family: var(--sans);
+      line-height: 1.7;
+      position: relative;
+      overflow-x: hidden;
     }
 
-    header {
-      background-color: #2c3e50;
-      color: white;
-      padding: 1rem 0;
-      text-align: center;
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+      background:
+        radial-gradient(
+          circle at 15% 35%,
+          rgba(39, 94, 123, 0.13),
+          transparent 28rem
+        );
     }
 
-    nav {
-      background-color: #34495e;
-      padding: 0.5rem 0;
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: 999;
+      pointer-events: none;
+      background: repeating-linear-gradient(
+        to bottom,
+        rgba(255, 255, 255, 0.012) 0px,
+        rgba(255, 255, 255, 0.012) 1px,
+        transparent 1px,
+        transparent 3px
+      );
+      opacity: 0.5;
+      mix-blend-mode: overlay;
     }
 
-    nav ul {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-      display: flex;
-      justify-content: center;
-      gap: 2rem;
-    }
-
-    nav ul li a {
-      color: white;
-      text-decoration: none;
-      font-weight: 500;
-      padding: 0.5rem 1rem;
-      transition: background-color 0.3s;
-    }
-
-    nav ul li a:hover {
-      background-color: #4a6076;
-      border-radius: 5px;
-    }
-
-    .container {
-      max-width: 700px;
-      margin: 2rem auto;
-      background-color: rgba(44, 62, 80, 0.7);
-      padding: 2rem;
-      border-radius: 8px;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
-      color: white;
-      text-align: center;
-    }
-
-    h1 {
-      font-size: 2rem;
-      color: #ffffff;
-    }
-
-    p {
-      font-size: 1.2rem;
-      margin: 1rem 0;
+    img,
+    iframe {
+      max-width: 100%;
     }
 
     a {
-      color: #add8e6;
-      text-decoration: none;
-      font-weight: 500;
+      color: inherit;
     }
 
-    a:hover {
+    .page-width {
+      width: min(var(--page-width), calc(100% - 44px));
+      margin: 0 auto;
+    }
+
+    .site-nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-bottom: 1px solid var(--border);
+      background: rgba(5, 10, 16, 0.82);
+      backdrop-filter: blur(18px);
+    }
+
+    .nav-inner {
+      min-height: 74px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 30px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+
+    .brand-mark {
+      display: grid;
+      place-items: center;
+      width: 38px;
+      height: 38px;
+      border: 1px solid var(--border-bright);
+      border-radius: 10px;
+      color: var(--cyan);
+      background: var(--cyan-soft);
+      font-family: var(--mono);
+      font-size: 0.88rem;
+      font-weight: 700;
+    }
+
+    .brand-name {
+      font-size: 0.96rem;
+      font-weight: 750;
+      letter-spacing: -0.01em;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .nav-links a {
+      display: block;
+      padding: 9px 13px;
+      color: var(--text-soft);
+      border-radius: 9px;
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      text-decoration: none;
+      transition:
+        color 160ms ease,
+        background-color 160ms ease;
+    }
+
+    .nav-links a:hover,
+    .nav-links a:focus-visible,
+    .nav-links a[aria-current="page"] {
+      color: var(--cyan);
+      background: var(--cyan-soft);
+    }
+
+    .page-header {
+      padding-top: 70px;
+      padding-bottom: 56px;
+    }
+
+    .status-line {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 24px;
+      padding: 8px 12px;
+      color: var(--green);
+      border: 1px solid rgba(116, 224, 167, 0.22);
+      border-radius: 999px;
+      background: rgba(116, 224, 167, 0.07);
+      font-family: var(--mono);
+      font-size: 0.76rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--green);
+      box-shadow: 0 0 14px rgba(116, 224, 167, 0.7);
+      animation: pulse-dot 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.85); }
+    }
+
+    .page-header h1 {
+      max-width: 780px;
+      margin: 0;
+      font-size: clamp(2.8rem, 6vw, 5rem);
+      line-height: 0.98;
+      letter-spacing: -0.05em;
+    }
+
+    .page-header h1 span {
+      display: block;
+      color: var(--cyan);
+    }
+
+    .page-intro {
+      max-width: 680px;
+      margin: 26px 0 0;
+      color: var(--text-soft);
+      font-size: clamp(1.04rem, 1.6vw, 1.2rem);
+    }
+
+    .terminal-line {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 22px;
+      color: var(--cyan);
+      font-family: var(--mono);
+      font-size: 0.92rem;
+    }
+
+    .terminal-prompt {
+      color: var(--text-muted);
+    }
+
+    .terminal-cursor {
+      display: inline-block;
+      width: 8px;
+      height: 1.1em;
+      background: var(--cyan);
+      animation: blink 1s steps(1) infinite;
+      vertical-align: middle;
+    }
+
+    @keyframes blink {
+      50% { opacity: 0; }
+    }
+
+    .section {
+      padding: 72px 0;
+      border-top: 1px solid var(--border);
+      position: relative;
+    }
+
+    .section-heading {
+      display: grid;
+      grid-template-columns: 180px minmax(0, 1fr);
+      gap: 36px;
+      margin-bottom: 40px;
+    }
+
+    .section-index {
+      padding-top: 7px;
+      color: var(--cyan);
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .section-heading h2 {
+      max-width: 760px;
+      margin: 0;
+      font-size: clamp(2rem, 4.4vw, 3.4rem);
+      line-height: 1.06;
+      letter-spacing: -0.04em;
+    }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 0.85fr) minmax(320px, 1fr);
+      gap: 24px;
+    }
+
+    .content-panel,
+    .code-panel,
+    .embed-card {
+      border: 1px solid var(--border);
+      background: var(--panel);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(16px);
+    }
+
+    .content-panel {
+      padding: 34px;
+      border-radius: var(--radius-large);
+    }
+
+    .content-panel p {
+      margin: 0 0 20px;
+      color: var(--text-soft);
+      font-size: 1.04rem;
+    }
+
+    .content-panel p:last-child {
+      margin-bottom: 0;
+    }
+
+    .contact-line {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 16px 18px;
+      margin-bottom: 14px;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.025);
+    }
+
+    .contact-line:last-child {
+      margin-bottom: 0;
+    }
+
+    .contact-icon {
+      display: grid;
+      place-items: center;
+      width: 38px;
+      height: 38px;
+      flex-shrink: 0;
+      border: 1px solid var(--border-bright);
+      border-radius: 10px;
+      color: var(--cyan);
+      background: var(--cyan-soft);
+      font-family: var(--mono);
+      font-size: 0.9rem;
+    }
+
+    .contact-line-body {
+      min-width: 0;
+    }
+
+    .contact-label {
+      margin: 0 0 2px;
+      color: var(--text-muted);
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .contact-value {
+      margin: 0;
+      color: var(--text);
+      font-size: 0.98rem;
+      word-break: break-word;
+    }
+
+    .contact-value a {
+      color: var(--cyan);
+      text-decoration: none;
+    }
+
+    .contact-value a:hover {
       text-decoration: underline;
     }
 
-    footer {
-      text-align: center;
-      padding: 1rem 0;
-      background-color: #2c3e50;
-      color: white;
-      margin-top: 2rem;
+    .code-panel {
+      overflow: hidden;
+      border-radius: var(--radius-large);
+    }
+
+    .code-bar {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.025);
+    }
+
+    .window-dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      opacity: 0.85;
+    }
+
+    .window-dot.red { background: #ff6b6b; }
+    .window-dot.yellow { background: #f5c26b; }
+    .window-dot.green { background: #74e0a7; }
+
+    .code-title {
+      margin-left: 8px;
+      color: var(--text-muted);
+      font-family: var(--mono);
+      font-size: 0.72rem;
+    }
+
+    .code-content {
+      margin: 0;
+      padding: 26px;
+      overflow-x: auto;
+      color: var(--text-soft);
+      font-family: var(--mono);
+      font-size: 0.82rem;
+      line-height: 1.9;
+      white-space: pre-wrap;
+    }
+
+    .code-key { color: var(--blue); }
+    .code-string { color: var(--green); }
+    .code-bracket { color: var(--cyan); }
+
+    .linkedin-panel {
+      padding: 26px;
+      border-radius: var(--radius-large);
+      margin-top: 18px;
+    }
+
+    .linkedin-panel-label {
+      margin: 0 0 16px;
+      color: var(--text-muted);
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+    }
+
+    .badge-wrap {
+      display: flex;
+      justify-content: center;
+    }
+
+    .embed-card {
+      overflow: hidden;
+      border-radius: var(--radius-large);
+      margin-top: 18px;
+    }
+
+    .embed-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 18px 22px;
+      border-bottom: 1px solid var(--border);
+      flex-wrap: wrap;
+    }
+
+    .embed-header p {
+      margin: 0;
+      color: var(--text-muted);
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .video-frame-wrap {
+      position: relative;
+      width: 100%;
+      padding-top: 56.25%;
+      background: #000;
+    }
+
+    .video-frame-wrap iframe {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    .tag {
+      padding: 7px 10px;
+      color: var(--cyan);
+      border: 1px solid var(--border-bright);
+      border-radius: 999px;
+      background: var(--cyan-soft);
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .site-footer {
+      padding: 38px 0;
+      color: var(--text-muted);
+      border-top: 1px solid var(--border);
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      font-family: var(--mono);
+      font-size: 0.72rem;
+    }
+
+    .footer-accent {
+      color: var(--cyan);
+    }
+
+    a:focus-visible {
+      outline: 3px solid rgba(92, 225, 230, 0.34);
+      outline-offset: 4px;
+    }
+
+    @media (max-width: 960px) {
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 700px) {
+      .page-width {
+        width: min(var(--page-width), calc(100% - 26px));
+      }
+
+      .nav-inner {
+        min-height: 66px;
+      }
+
+      .brand-name {
+        display: none;
+      }
+
+      .nav-links {
+        overflow-x: auto;
+      }
+
+      .nav-links a {
+        padding-inline: 9px;
+        font-size: 0.7rem;
+      }
+
+      .page-header {
+        padding-top: 54px;
+        padding-bottom: 44px;
+      }
+
+      .section {
+        padding: 56px 0;
+      }
+
+      .section-heading {
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+
+      .content-panel,
+      .linkedin-panel {
+        padding: 22px;
+      }
+
+      .footer-inner {
+        flex-direction: column;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      *,
+      *::before,
+      *::after {
+        transition: none !important;
+      }
+
+      .status-dot,
+      .terminal-cursor {
+        animation: none !important;
+      }
     }
   </style>
 </head>
+
 <body>
-  <div style="position: fixed; inset: 0; background-color: rgba(255,255,255,0.6); z-index: -1;"></div>
+  <nav class="site-nav" aria-label="Primary navigation">
+    <div class="page-width nav-inner">
+      <a class="brand" href="index.html">
+        <span class="brand-mark">&lt;LC/&gt;</span>
+        <span class="brand-name">Lucila M. Corro</span>
+      </a>
 
-  <header>
-    <h1>Lucila Corro MS</h1>
-    <p>Contact</p>
-  </header>
-
-  <nav>
-    <ul>
-      <li><a href="index.html">Home</a></li>
-      <li><a href="research.html">Research</a></li>
-      <li><a href="publications.html">Publications</a></li>
-      <li><a href="contact.html">Contact</a></li>
-    </ul>
+      <ul class="nav-links">
+        <li><a href="index.html">01_HOME</a></li>
+        <li><a href="index.html#dashboard">02_DASHBOARD</a></li>
+        <li><a href="research.html">03_RESEARCH</a></li>
+        <li><a href="publications.html">04_PUBLICATIONS</a></li>
+        <li><a href="contact.html" aria-current="page">05_CONTACT</a></li>
+      </ul>
+    </div>
   </nav>
 
-  <div class="container">
-    <h1>Get in Touch</h1>
-    <p>Email: <a href="mailto:Lucyinthesky_geo@hotmail.com">Lucyinthesky_geo@hotmail.com</a></p>    
-    <!-- LinkedIn Badge -->
-   <div style="display: flex; justify-content: center;">
-   <div class="badge-base LI-profile-badge" 
-         data-locale="en_US" 
-         data-size="large" 
-         data-theme="dark" 
-         data-type="HORIZONTAL" 
-         data-vanity="lucila-corro-5993b152" 
-         data-version="v1">
+  <main>
+    <header class="page-width page-header">
+      <div class="status-line">
+        <span class="status-dot"></span>
+        Open to collaboration
+      </div>
+
+      <h1>
+        Contact
+        <span>Let's connect.</span>
+      </h1>
+
+      <p class="page-intro">
+        Reach out about research collaborations, data products, or
+        just to say hello.
+      </p>
+
+      <div class="terminal-line">
+        <span class="terminal-prompt">$</span>
+        <span>mailto Lucyinthesky_geo@hotmail.com</span>
+        <span class="terminal-cursor"></span>
+      </div>
+    </header>
+
+    <section class="section" id="get-in-touch">
+      <div class="page-width">
+        <div class="section-heading">
+          <div class="section-index">01 / Get in touch</div>
+          <h2>Contact details and social links.</h2>
+        </div>
+
+        <div class="contact-grid">
+          <div>
+            <div class="content-panel">
+              <div class="contact-line">
+                <span class="contact-icon">@</span>
+                <div class="contact-line-body">
+                  <p class="contact-label">Email</p>
+                  <p class="contact-value">
+                    <a href="mailto:Lucyinthesky_geo@hotmail.com">Lucyinthesky_geo@hotmail.com</a>
+                  </p>
+                </div>
+              </div>
+
+              <div class="contact-line">
+                <span class="contact-icon">in</span>
+                <div class="contact-line-body">
+                  <p class="contact-label">LinkedIn</p>
+                  <p class="contact-value">lucila-corro-5993b152</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="linkedin-panel content-panel">
+              <p class="linkedin-panel-label">LinkedIn profile badge</p>
+              <div class="badge-wrap">
+                <div
+                  class="badge-base LI-profile-badge"
+                  data-locale="en_US"
+                  data-size="large"
+                  data-theme="dark"
+                  data-type="HORIZONTAL"
+                  data-vanity="lucila-corro-5993b152"
+                  data-version="v1"
+                ></div>
+              </div>
+            </div>
+          </div>
+
+          <div class="code-panel">
+            <div class="code-bar">
+              <span class="window-dot red"></span>
+              <span class="window-dot yellow"></span>
+              <span class="window-dot green"></span>
+              <span class="code-title">contact.json</span>
+            </div>
+
+            <pre class="code-content"><code><span class="code-bracket">{</span>
+  <span class="code-key">"name"</span>: <span class="code-string">"Lucila M. Corro"</span>,
+  <span class="code-key">"email"</span>: <span class="code-string">"Lucyinthesky_geo@hotmail.com"</span>,
+  <span class="code-key">"linkedin"</span>: <span class="code-string">"lucila-corro-5993b152"</span>,
+  <span class="code-key">"status"</span>: <span class="code-string">"open to collaboration"</span>
+<span class="code-bracket">}</span></code></pre>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="video">
+      <div class="page-width">
+        <div class="section-heading">
+          <div class="section-index">02 / Video</div>
+          <h2>A closer look at the work.</h2>
+        </div>
+
+        <div class="embed-card">
+          <div class="embed-header">
+            <p>Embedded video</p>
+            <span class="tag">YouTube</span>
+          </div>
+
+          <div class="video-frame-wrap">
+            <iframe
+              src="https://www.youtube.com/embed/55TOIJxKc74?si=wVYo0FJwPs_bmVxv"
+              title="YouTube video player"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerpolicy="strict-origin-when-cross-origin"
+              allowfullscreen
+            ></iframe>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="page-width footer-inner">
+      <span>&copy; 2026 Lucila M. Corro</span>
+      <span>
+        Built with
+        <span class="footer-accent">data + code + ecology</span>
+      </span>
     </div>
-  </div>
-
-  <!-- YouTube Video Embed -->
-  <iframe width="560" height="315" src="https://www.youtube.com/embed/55TOIJxKc74?si=wVYo0FJwPs_bmVxv" 
-          title="YouTube video player" frameborder="0" 
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-          referrerpolicy="strict-origin-when-cross-origin" allowfullscreen>
-  </iframe>
-
-  <!-- Load LinkedIn Badge Script -->
-  <script src="https://platform.linkedin.com/badges/js/profile.js" async defer></script>
-
-  <footer>
-    <p>&copy; 2025 Lucila M. Corro. All rights reserved.</p>
   </footer>
+
+  <script src="https://platform.linkedin.com/badges/js/profile.js" async defer></script>
 </body>
 </html>
