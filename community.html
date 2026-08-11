@@ -1,0 +1,916 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta
+    name="description"
+    content="Community service and wildland fire involvement of Lucila M. Corro, including firefighting, grants, event coordination, and mapping."
+  >
+  <title>Community + Fire | Lucila M. Corro, M.S.</title>
+
+  <style>
+    :root {
+      --background: #050a10;
+      --background-soft: #0b1722;
+      --panel: rgba(14, 29, 41, 0.82);
+      --panel-solid: #0e1d29;
+      --panel-light: #132838;
+      --text: #eef7fb;
+      --text-soft: #a8bbc7;
+      --text-muted: #728896;
+      --cyan: #5ce1e6;
+      --cyan-soft: rgba(92, 225, 230, 0.12);
+      --blue: #57a7ff;
+      --green: #74e0a7;
+      --amber: #f5c26b;
+      --orange: #ff9a62;
+      --red: #ff6b6b;
+      --border: rgba(130, 194, 218, 0.16);
+      --border-bright: rgba(92, 225, 230, 0.34);
+      --shadow: 0 28px 80px rgba(0, 0, 0, 0.36);
+      --radius-large: 28px;
+      --radius-medium: 18px;
+      --page-width: 1180px;
+      --mono: "SFMono-Regular", Consolas, "Liberation Mono", Menlo, monospace;
+      --sans: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      color: var(--text);
+      background:
+        linear-gradient(rgba(255, 154, 98, 0.028) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(92, 225, 230, 0.025) 1px, transparent 1px),
+        radial-gradient(circle at 82% 10%, rgba(255, 107, 107, 0.11), transparent 34rem),
+        radial-gradient(circle at 12% 38%, rgba(92, 225, 230, 0.10), transparent 28rem),
+        var(--background);
+      background-size: 42px 42px, 42px 42px, auto, auto, auto;
+      font-family: var(--sans);
+      line-height: 1.7;
+      overflow-x: hidden;
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: 999;
+      pointer-events: none;
+      background: repeating-linear-gradient(
+        to bottom,
+        rgba(255,255,255,0.012) 0,
+        rgba(255,255,255,0.012) 1px,
+        transparent 1px,
+        transparent 3px
+      );
+      opacity: 0.5;
+      mix-blend-mode: overlay;
+    }
+
+    a { color: inherit; }
+    img { max-width: 100%; }
+
+    .page-width {
+      width: min(var(--page-width), calc(100% - 44px));
+      margin: 0 auto;
+    }
+
+    .site-nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-bottom: 1px solid var(--border);
+      background: rgba(5, 10, 16, 0.84);
+      backdrop-filter: blur(18px);
+    }
+
+    .nav-inner {
+      min-height: 74px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 30px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+
+    .brand-mark {
+      display: grid;
+      place-items: center;
+      width: 38px;
+      height: 38px;
+      border: 1px solid rgba(255,154,98,0.42);
+      border-radius: 10px;
+      color: var(--orange);
+      background: rgba(255,154,98,0.09);
+      font-family: var(--mono);
+      font-size: 0.88rem;
+      font-weight: 700;
+    }
+
+    .brand-name {
+      font-size: 0.96rem;
+      font-weight: 750;
+      letter-spacing: -0.01em;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .nav-links a {
+      display: block;
+      padding: 9px 13px;
+      color: var(--text-soft);
+      border-radius: 9px;
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      text-decoration: none;
+      transition: color 160ms ease, background-color 160ms ease;
+    }
+
+    .nav-links a:hover,
+    .nav-links a:focus-visible,
+    .nav-links a[aria-current="page"] {
+      color: var(--orange);
+      background: rgba(255,154,98,0.09);
+    }
+
+    .hero {
+      min-height: calc(100vh - 74px);
+      display: grid;
+      grid-template-columns: minmax(0, 1.08fr) minmax(330px, 0.92fr);
+      align-items: center;
+      gap: 64px;
+      padding-top: 72px;
+      padding-bottom: 90px;
+    }
+
+    .status-line {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 24px;
+      padding: 8px 12px;
+      color: var(--orange);
+      border: 1px solid rgba(255,154,98,0.24);
+      border-radius: 999px;
+      background: rgba(255,154,98,0.075);
+      font-family: var(--mono);
+      font-size: 0.76rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--orange);
+      box-shadow: 0 0 14px rgba(255,154,98,0.72);
+      animation: pulse-dot 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: .5; transform: scale(.85); }
+    }
+
+    .hero h1 {
+      max-width: 800px;
+      margin: 0;
+      font-size: clamp(3.35rem, 8vw, 6.7rem);
+      line-height: .94;
+      letter-spacing: -0.065em;
+    }
+
+    .hero h1 span {
+      display: block;
+      color: var(--orange);
+    }
+
+    .hero-intro {
+      max-width: 690px;
+      margin: 30px 0 0;
+      color: var(--text-soft);
+      font-size: clamp(1.08rem, 2vw, 1.28rem);
+    }
+
+    .terminal-line {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 22px;
+      color: var(--cyan);
+      font-family: var(--mono);
+      font-size: 0.92rem;
+    }
+
+    .terminal-prompt { color: var(--text-muted); }
+
+    .terminal-cursor {
+      display: inline-block;
+      width: 8px;
+      height: 1.1em;
+      background: var(--orange);
+      animation: blink 1s steps(1) infinite;
+      vertical-align: middle;
+    }
+
+    @keyframes blink { 50% { opacity: 0; } }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 34px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      min-height: 48px;
+      padding: 0 19px;
+      border: 1px solid var(--border);
+      border-radius: 11px;
+      font-family: var(--mono);
+      font-size: 0.82rem;
+      font-weight: 700;
+      text-decoration: none;
+      transition: transform 160ms ease, border-color 160ms ease, background-color 160ms ease;
+    }
+
+    .button-primary {
+      color: #160904;
+      border-color: var(--orange);
+      background: var(--orange);
+      box-shadow: 0 12px 32px rgba(255,154,98,0.18);
+    }
+
+    .button-secondary { background: rgba(255,255,255,0.03); }
+    .button:hover { transform: translateY(-2px); }
+    .button-secondary:hover { border-color: rgba(255,154,98,0.38); color: var(--orange); }
+
+    .hero-visual {
+      position: relative;
+      min-height: 560px;
+      display: grid;
+      place-items: center;
+    }
+
+    .topo-panel {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-large);
+      background:
+        radial-gradient(circle at 72% 30%, rgba(255,154,98,0.14), transparent 14rem),
+        linear-gradient(145deg, rgba(92,225,230,0.05), rgba(255,107,107,0.03)),
+        rgba(8,18,27,0.72);
+      box-shadow: var(--shadow);
+    }
+
+    .topo-panel svg { width: 100%; height: 100%; display: block; }
+
+    .incident-card {
+      position: absolute;
+      left: -18px;
+      bottom: 28px;
+      z-index: 3;
+      width: min(390px, calc(100% - 22px));
+      padding: 20px;
+      border: 1px solid rgba(255,154,98,0.34);
+      border-radius: 18px;
+      background: rgba(10, 24, 34, 0.92);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(18px);
+    }
+
+    .incident-label {
+      margin: 0 0 6px;
+      color: var(--orange);
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .incident-card h2 { margin: 0; font-size: 1.25rem; }
+    .incident-card p { margin: 7px 0 0; color: var(--text-soft); font-size: 0.9rem; }
+
+    .section {
+      padding: 92px 0;
+      border-top: 1px solid var(--border);
+      position: relative;
+    }
+
+    .section-heading {
+      display: grid;
+      grid-template-columns: 180px minmax(0, 1fr);
+      gap: 36px;
+      margin-bottom: 46px;
+    }
+
+    .section-index {
+      padding-top: 7px;
+      color: var(--orange);
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .section-heading h2 {
+      max-width: 780px;
+      margin: 0;
+      font-size: clamp(2.2rem, 5vw, 4rem);
+      line-height: 1.05;
+      letter-spacing: -0.045em;
+    }
+
+    .content-panel,
+    .role-card,
+    .map-panel,
+    .quote-panel,
+    .timeline-card {
+      border: 1px solid var(--border);
+      background: var(--panel);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(16px);
+    }
+
+    .content-panel {
+      padding: 34px;
+      border-radius: var(--radius-large);
+    }
+
+    .content-panel p {
+      margin: 0 0 20px;
+      color: var(--text-soft);
+      font-size: 1.04rem;
+    }
+
+    .content-panel p:last-child { margin-bottom: 0; }
+    .content-panel strong { color: var(--text); }
+
+    .role-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+
+    .role-card {
+      min-height: 260px;
+      padding: 28px;
+      border-radius: var(--radius-medium);
+      position: relative;
+      overflow: hidden;
+      transition: transform 180ms ease, border-color 180ms ease, background-color 180ms ease;
+    }
+
+    .role-card::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--orange), transparent);
+    }
+
+    .role-card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(255,154,98,0.34);
+      background: var(--panel-light);
+    }
+
+    .role-number {
+      color: var(--orange);
+      font-family: var(--mono);
+      font-size: 0.72rem;
+    }
+
+    .role-card h3 {
+      margin: 28px 0 12px;
+      font-size: 1.32rem;
+    }
+
+    .role-card p {
+      margin: 0;
+      color: var(--text-soft);
+      font-size: 0.96rem;
+    }
+
+    .role-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 22px;
+    }
+
+    .tag {
+      padding: 7px 10px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      color: var(--text-muted);
+      background: rgba(255,255,255,0.025);
+      font-family: var(--mono);
+      font-size: 0.68rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .tag.fire { color: var(--orange); border-color: rgba(255,154,98,0.32); background: rgba(255,154,98,0.07); }
+    .tag.map { color: var(--cyan); border-color: rgba(92,225,230,0.30); background: rgba(92,225,230,0.07); }
+    .tag.grant { color: var(--green); border-color: rgba(116,224,167,0.30); background: rgba(116,224,167,0.07); }
+
+    .split-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.08fr) minmax(320px, .92fr);
+      gap: 22px;
+    }
+
+    .map-panel {
+      min-height: 410px;
+      border-radius: var(--radius-large);
+      overflow: hidden;
+      position: relative;
+      background:
+        radial-gradient(circle at 30% 40%, rgba(92,225,230,.10), transparent 11rem),
+        rgba(9,20,29,.84);
+    }
+
+    .map-panel svg { width: 100%; height: 100%; display: block; }
+
+    .map-caption {
+      position: absolute;
+      left: 22px;
+      right: 22px;
+      bottom: 22px;
+      padding: 16px 18px;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      background: rgba(5,10,16,.82);
+      backdrop-filter: blur(12px);
+    }
+
+    .map-caption strong { display: block; margin-bottom: 4px; }
+    .map-caption span { color: var(--text-soft); font-size: .9rem; }
+
+    .quote-panel {
+      padding: 34px;
+      border-radius: var(--radius-large);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+
+    .quote-mark {
+      color: var(--orange);
+      font-family: Georgia, serif;
+      font-size: 4rem;
+      line-height: .8;
+    }
+
+    .quote-panel blockquote {
+      margin: 22px 0 0;
+      color: var(--text);
+      font-size: 1.35rem;
+      line-height: 1.45;
+      letter-spacing: -0.02em;
+    }
+
+    .quote-panel p {
+      margin: 26px 0 0;
+      color: var(--text-muted);
+      font-family: var(--mono);
+      font-size: .78rem;
+    }
+
+    .timeline {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+    }
+
+    .timeline-card {
+      padding: 22px;
+      border-radius: 14px;
+    }
+
+    .timeline-card .eyebrow {
+      color: var(--orange);
+      font-family: var(--mono);
+      font-size: .68rem;
+      letter-spacing: .07em;
+      text-transform: uppercase;
+    }
+
+    .timeline-card h3 { margin: 15px 0 8px; font-size: 1rem; }
+    .timeline-card p { margin: 0; color: var(--text-soft); font-size: .88rem; }
+
+    .cta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    .site-footer {
+      padding: 38px 0;
+      color: var(--text-muted);
+      border-top: 1px solid var(--border);
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      font-family: var(--mono);
+      font-size: 0.72rem;
+    }
+
+    .footer-accent { color: var(--orange); }
+
+    a:focus-visible {
+      outline: 3px solid rgba(255,154,98,.34);
+      outline-offset: 4px;
+    }
+
+    @media (max-width: 960px) {
+      .hero { grid-template-columns: 1fr; gap: 50px; }
+      .hero-visual { min-height: 500px; }
+      .role-grid { grid-template-columns: 1fr; }
+      .split-grid { grid-template-columns: 1fr; }
+      .timeline { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 700px) {
+      .page-width { width: min(var(--page-width), calc(100% - 26px)); }
+      .nav-inner { min-height: 66px; }
+      .brand-name { display: none; }
+      .nav-links { overflow-x: auto; }
+      .nav-links a { padding-inline: 9px; font-size: .7rem; }
+      .hero { min-height: auto; padding-top: 54px; padding-bottom: 70px; }
+      .hero h1 { font-size: clamp(3rem, 16vw, 4.7rem); }
+      .hero-visual { min-height: 440px; }
+      .incident-card { left: 10px; }
+      .section { padding: 70px 0; }
+      .section-heading { grid-template-columns: 1fr; gap: 12px; }
+      .content-panel, .quote-panel { padding: 25px; }
+      .timeline { grid-template-columns: 1fr; }
+      .footer-inner { flex-direction: column; }
+    }
+
+    @media (max-width: 480px) {
+      .hero-actions { display: grid; }
+      .button { width: 100%; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after { transition: none !important; }
+      .status-dot, .terminal-cursor { animation: none !important; }
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="site-nav" aria-label="Primary navigation">
+    <div class="page-width nav-inner">
+      <a class="brand" href="index.html">
+        <span class="brand-mark">&lt;LC/&gt;</span>
+        <span class="brand-name">Lucila M. Corro, M.S.</span>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="index.html">01_HOME</a></li>
+        <li><a href="research.html">02_RESEARCH</a></li>
+        <li><a href="publications.html">03_PUBLICATIONS</a></li>
+        <li><a href="community.html" aria-current="page">04_COMMUNITY</a></li>
+        <li><a href="contact.html">05_CONTACT</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main>
+    <section class="page-width hero">
+      <div>
+        <div class="status-line">
+          <span class="status-dot"></span>
+          Fire service + community involvement
+        </div>
+
+        <h1>
+          Outside the office.
+          <span>Service, fire, maps, and community.</span>
+        </h1>
+
+        <p class="hero-intro">
+          Beyond my scientific work, I serve my mountain community as a
+          wildland firefighter and volunteer in roles that combine emergency
+          response, local leadership, planning, and mapping.
+        </p>
+
+        <div class="terminal-line">
+          <span class="terminal-prompt">$</span>
+          <span>community --serve --map --respond</span>
+          <span class="terminal-cursor"></span>
+        </div>
+
+        <div class="hero-actions">
+          <a class="button button-primary" href="#roles">
+            Explore community roles
+            <span aria-hidden="true">→</span>
+          </a>
+
+          <a class="button button-secondary" href="#mapping">
+            View mapping + coordination
+          </a>
+        </div>
+      </div>
+
+      <div class="hero-visual" aria-hidden="true">
+        <div class="topo-panel">
+          <svg viewBox="0 0 500 500" preserveAspectRatio="none">
+            <defs>
+              <pattern id="grid" width="42" height="42" patternUnits="userSpaceOnUse">
+                <path d="M42 0H0V42" fill="none" stroke="#5ce1e6" stroke-width="0.45" opacity="0.22"/>
+              </pattern>
+              <radialGradient id="glow" cx="70%" cy="30%" r="45%">
+                <stop offset="0%" stop-color="#ff9a62" stop-opacity="0.22"/>
+                <stop offset="100%" stop-color="#ff9a62" stop-opacity="0"/>
+              </radialGradient>
+            </defs>
+            <rect width="500" height="500" fill="url(#grid)"/>
+            <rect width="500" height="500" fill="url(#glow)"/>
+
+            <g fill="none" stroke="#728896" opacity="0.34" stroke-width="1.1">
+              <path d="M-20 95 C70 55,145 85,210 52 S365 12,520 68"/>
+              <path d="M-30 130 C60 92,150 120,220 88 S385 50,535 102"/>
+              <path d="M-30 170 C75 128,145 162,235 126 S395 92,540 144"/>
+              <path d="M-20 218 C90 166,175 215,250 172 S405 135,530 194"/>
+              <path d="M-20 268 C95 220,182 258,275 218 S420 190,540 242"/>
+              <path d="M-30 318 C85 275,185 305,285 266 S430 238,530 292"/>
+              <path d="M-20 370 C88 325,182 356,285 316 S435 292,540 346"/>
+              <path d="M-10 424 C100 376,200 410,304 372 S450 345,535 397"/>
+            </g>
+
+            <path d="M76 420 C120 358,128 285,182 236 C226 196,278 176,328 122 C360 88,385 72,435 52"
+              fill="none" stroke="#ff9a62" stroke-width="3" opacity="0.8"/>
+            <path d="M92 420 C145 372,160 306,205 268 C245 233,290 218,338 168"
+              fill="none" stroke="#5ce1e6" stroke-width="1.4" opacity="0.66" stroke-dasharray="6 7"/>
+
+            <g>
+              <circle cx="182" cy="236" r="7" fill="#ff9a62"/>
+              <circle cx="328" cy="122" r="6" fill="#5ce1e6"/>
+              <circle cx="205" cy="268" r="5" fill="#74e0a7"/>
+            </g>
+          </svg>
+        </div>
+
+        <div class="incident-card">
+          <p class="incident-label">Community profile</p>
+          <h2>Wildland Firefighter + Volunteer Leader</h2>
+          <p>Emergency response, grants, mountain festival coordination, and operational mapping.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="about-community">
+      <div class="page-width">
+        <div class="section-heading">
+          <div class="section-index">01 / Community</div>
+          <h2>Helping take care of the place I call home.</h2>
+        </div>
+
+        <div class="content-panel">
+          <p>
+            My life outside of work is rooted in <strong>community service and wildland fire</strong>.
+            I serve as a wildland firefighter and contribute to several volunteer efforts that support
+            local emergency response, planning, funding, and public events.
+          </p>
+
+          <p>
+            These roles let me combine practical field experience with skills I already care deeply about:
+            <strong>organization, spatial thinking, problem-solving, and working with people under real-world constraints</strong>.
+            Whether the task is preparing for fire season, coordinating firefighters during a mountain festival,
+            reviewing grant needs, or improving maps, the goal is the same: make the community safer and more prepared.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="roles">
+      <div class="page-width">
+        <div class="section-heading">
+          <div class="section-index">02 / Roles</div>
+          <h2>Four ways I contribute beyond my day job.</h2>
+        </div>
+
+        <div class="role-grid">
+          <article class="role-card">
+            <span class="role-number">01</span>
+            <h3>Wildland Firefighter</h3>
+            <p>
+              I serve as a wildland firefighter, supporting emergency response and helping protect
+              people, property, and surrounding landscapes during wildfire incidents.
+            </p>
+            <div class="role-tags">
+              <span class="tag fire">Fire response</span>
+              <span class="tag fire">Field operations</span>
+              <span class="tag">Teamwork</span>
+            </div>
+          </article>
+
+          <article class="role-card">
+            <span class="role-number">02</span>
+            <h3>Grants Committee</h3>
+            <p>
+              I serve on the grants committee, helping support funding efforts for equipment,
+              preparedness, training, and other community or fire-service needs.
+            </p>
+            <div class="role-tags">
+              <span class="tag grant">Funding</span>
+              <span class="tag grant">Planning</span>
+              <span class="tag">Community support</span>
+            </div>
+          </article>
+
+          <article class="role-card">
+            <span class="role-number">03</span>
+            <h3>Mountain Festival Fire Coordination</h3>
+            <p>
+              During our mountain festival, I help organize firefighters and coordinate coverage so
+              emergency-response resources are positioned and ready while the community gathers.
+            </p>
+            <div class="role-tags">
+              <span class="tag fire">Event operations</span>
+              <span class="tag">Coordination</span>
+              <span class="tag">Public safety</span>
+            </div>
+          </article>
+
+          <article class="role-card">
+            <span class="role-number">04</span>
+            <h3>Mapping Task Force</h3>
+            <p>
+              I serve on the mapping task force, bringing geospatial thinking into local preparedness
+              and response through clearer, more useful maps and spatial information.
+            </p>
+            <div class="role-tags">
+              <span class="tag map">GIS</span>
+              <span class="tag map">Operational mapping</span>
+              <span class="tag">Preparedness</span>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="mapping">
+      <div class="page-width">
+        <div class="section-heading">
+          <div class="section-index">03 / Mapping + response</div>
+          <h2>Where geospatial skills meet local knowledge.</h2>
+        </div>
+
+        <div class="split-grid">
+          <div class="map-panel" aria-hidden="true">
+            <svg viewBox="0 0 650 420" preserveAspectRatio="none">
+              <rect width="650" height="420" fill="#09141d"/>
+              <g opacity="0.32" fill="none" stroke="#728896" stroke-width="1.2">
+                <path d="M-20 70 C100 10,210 90,320 38 S520 20,690 62"/>
+                <path d="M-30 110 C100 55,210 128,330 78 S535 55,690 98"/>
+                <path d="M-25 155 C80 108,210 165,340 124 S540 104,680 142"/>
+                <path d="M-20 205 C90 154,220 214,350 172 S550 150,690 188"/>
+                <path d="M-20 255 C110 207,230 262,365 220 S560 198,680 240"/>
+                <path d="M-20 310 C115 262,240 314,375 274 S565 252,690 292"/>
+                <path d="M-20 365 C100 320,230 366,390 328 S570 306,690 350"/>
+              </g>
+              <path d="M80 340 L160 280 L248 296 L328 210 L402 232 L505 145 L586 88"
+                fill="none" stroke="#5ce1e6" stroke-width="2.4" stroke-dasharray="8 8" opacity="0.78"/>
+              <path d="M95 355 L180 318 L255 330 L350 250 L430 258 L520 190"
+                fill="none" stroke="#ff9a62" stroke-width="3" opacity="0.8"/>
+              <g fill="#ff9a62">
+                <circle cx="180" cy="318" r="7"/>
+                <circle cx="350" cy="250" r="7"/>
+                <circle cx="520" cy="190" r="7"/>
+              </g>
+              <g fill="#5ce1e6">
+                <circle cx="160" cy="280" r="5"/>
+                <circle cx="328" cy="210" r="5"/>
+                <circle cx="586" cy="88" r="5"/>
+              </g>
+            </svg>
+
+            <div class="map-caption">
+              <strong>Operational mapping mindset</strong>
+              <span>Turn local knowledge, roads, access, terrain, and response needs into information people can actually use.</span>
+            </div>
+          </div>
+
+          <div class="quote-panel">
+            <div>
+              <div class="quote-mark">“</div>
+              <blockquote>
+                The most useful map is not the most complicated one. It is the one that helps someone make a better decision when it matters.
+              </blockquote>
+            </div>
+            <p>// mapping + field experience + community context</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="festival">
+      <div class="page-width">
+        <div class="section-heading">
+          <div class="section-index">04 / Coordination</div>
+          <h2>Planning for the moments when a small town gets very busy.</h2>
+        </div>
+
+        <div class="timeline">
+          <article class="timeline-card">
+            <span class="eyebrow">Before</span>
+            <h3>Plan coverage</h3>
+            <p>Think through staffing, locations, likely needs, and how firefighters will be organized during the festival.</p>
+          </article>
+
+          <article class="timeline-card">
+            <span class="eyebrow">Prepare</span>
+            <h3>Coordinate resources</h3>
+            <p>Help align people, equipment, maps, and communication so everyone knows the operational picture.</p>
+          </article>
+
+          <article class="timeline-card">
+            <span class="eyebrow">During</span>
+            <h3>Support response</h3>
+            <p>Keep firefighter coverage organized while the community event is active and conditions are changing.</p>
+          </article>
+
+          <article class="timeline-card">
+            <span class="eyebrow">After</span>
+            <h3>Improve the next plan</h3>
+            <p>Carry lessons forward into future coordination, preparedness, grant needs, and mapping efforts.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="why">
+      <div class="page-width">
+        <div class="section-heading">
+          <div class="section-index">05 / Why it matters</div>
+          <h2>Different roles, one shared purpose.</h2>
+        </div>
+
+        <div class="content-panel cta">
+          <div style="max-width: 760px;">
+            <p style="margin: 0 0 6px; color: var(--text); font-weight: 650; font-size: 1.14rem;">
+              I care about being useful where I live.
+            </p>
+            <p style="margin: 0;">
+              Firefighting, grant work, event coordination, and mapping all give me different ways to contribute to a resilient mountain community.
+            </p>
+          </div>
+
+          <a class="button button-primary" href="contact.html">
+            Contact me
+            <span aria-hidden="true">→</span>
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="page-width footer-inner">
+      <span>&copy; 2026 Lucila M. Corro, M.S.</span>
+      <span>
+        Built around
+        <span class="footer-accent">service + place + preparedness</span>
+      </span>
+    </div>
+  </footer>
+</body>
+</html>
