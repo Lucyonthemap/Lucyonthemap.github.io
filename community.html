@@ -288,7 +288,23 @@
       box-shadow: var(--shadow);
     }
 
-    .topo-panel svg { width: 100%; height: 100%; display: block; }
+    .topo-panel img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+      object-position: center 38%;
+    }
+
+    .topo-panel::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      pointer-events: none;
+      background:
+        linear-gradient(to top, rgba(5,10,16,0.46), transparent 42%),
+        linear-gradient(to right, rgba(5,10,16,0.12), transparent 48%);
+    }
 
     .incident-card {
       position: absolute;
@@ -458,10 +474,26 @@
         rgba(9,20,29,.84);
     }
 
-    .map-panel svg { width: 100%; height: 100%; display: block; }
+    .map-panel img {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: cover;
+      object-position: center;
+    }
+
+    .map-panel::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      pointer-events: none;
+      background: linear-gradient(to top, rgba(5,10,16,.58), transparent 52%);
+    }
 
     .map-caption {
       position: absolute;
+      z-index: 2;
       left: 22px;
       right: 22px;
       bottom: 22px;
@@ -649,43 +681,12 @@
         </div>
       </div>
 
-      <div class="hero-visual" aria-hidden="true">
+      <div class="hero-visual">
         <div class="topo-panel">
-          <svg viewBox="0 0 500 500" preserveAspectRatio="none">
-            <defs>
-              <pattern id="grid" width="42" height="42" patternUnits="userSpaceOnUse">
-                <path d="M42 0H0V42" fill="none" stroke="#5ce1e6" stroke-width="0.45" opacity="0.22"/>
-              </pattern>
-              <radialGradient id="glow" cx="70%" cy="30%" r="45%">
-                <stop offset="0%" stop-color="#ff9a62" stop-opacity="0.22"/>
-                <stop offset="100%" stop-color="#ff9a62" stop-opacity="0"/>
-              </radialGradient>
-            </defs>
-            <rect width="500" height="500" fill="url(#grid)"/>
-            <rect width="500" height="500" fill="url(#glow)"/>
-
-            <g fill="none" stroke="#728896" opacity="0.34" stroke-width="1.1">
-              <path d="M-20 95 C70 55,145 85,210 52 S365 12,520 68"/>
-              <path d="M-30 130 C60 92,150 120,220 88 S385 50,535 102"/>
-              <path d="M-30 170 C75 128,145 162,235 126 S395 92,540 144"/>
-              <path d="M-20 218 C90 166,175 215,250 172 S405 135,530 194"/>
-              <path d="M-20 268 C95 220,182 258,275 218 S420 190,540 242"/>
-              <path d="M-30 318 C85 275,185 305,285 266 S430 238,530 292"/>
-              <path d="M-20 370 C88 325,182 356,285 316 S435 292,540 346"/>
-              <path d="M-10 424 C100 376,200 410,304 372 S450 345,535 397"/>
-            </g>
-
-            <path d="M76 420 C120 358,128 285,182 236 C226 196,278 176,328 122 C360 88,385 72,435 52"
-              fill="none" stroke="#ff9a62" stroke-width="3" opacity="0.8"/>
-            <path d="M92 420 C145 372,160 306,205 268 C245 233,290 218,338 168"
-              fill="none" stroke="#5ce1e6" stroke-width="1.4" opacity="0.66" stroke-dasharray="6 7"/>
-
-            <g>
-              <circle cx="182" cy="236" r="7" fill="#ff9a62"/>
-              <circle cx="328" cy="122" r="6" fill="#5ce1e6"/>
-              <circle cx="205" cy="268" r="5" fill="#74e0a7"/>
-            </g>
-          </svg>
+          <img
+            src="IMG_1645.jpeg"
+            alt="Two wildland firefighters standing beside a yellow fire engine during a community event"
+          >
         </div>
 
         <div class="incident-card">
@@ -795,33 +796,11 @@
         </div>
 
         <div class="split-grid">
-          <div class="map-panel" aria-hidden="true">
-            <svg viewBox="0 0 650 420" preserveAspectRatio="none">
-              <rect width="650" height="420" fill="#09141d"/>
-              <g opacity="0.32" fill="none" stroke="#728896" stroke-width="1.2">
-                <path d="M-20 70 C100 10,210 90,320 38 S520 20,690 62"/>
-                <path d="M-30 110 C100 55,210 128,330 78 S535 55,690 98"/>
-                <path d="M-25 155 C80 108,210 165,340 124 S540 104,680 142"/>
-                <path d="M-20 205 C90 154,220 214,350 172 S550 150,690 188"/>
-                <path d="M-20 255 C110 207,230 262,365 220 S560 198,680 240"/>
-                <path d="M-20 310 C115 262,240 314,375 274 S565 252,690 292"/>
-                <path d="M-20 365 C100 320,230 366,390 328 S570 306,690 350"/>
-              </g>
-              <path d="M80 340 L160 280 L248 296 L328 210 L402 232 L505 145 L586 88"
-                fill="none" stroke="#5ce1e6" stroke-width="2.4" stroke-dasharray="8 8" opacity="0.78"/>
-              <path d="M95 355 L180 318 L255 330 L350 250 L430 258 L520 190"
-                fill="none" stroke="#ff9a62" stroke-width="3" opacity="0.8"/>
-              <g fill="#ff9a62">
-                <circle cx="180" cy="318" r="7"/>
-                <circle cx="350" cy="250" r="7"/>
-                <circle cx="520" cy="190" r="7"/>
-              </g>
-              <g fill="#5ce1e6">
-                <circle cx="160" cy="280" r="5"/>
-                <circle cx="328" cy="210" r="5"/>
-                <circle cx="586" cy="88" r="5"/>
-              </g>
-            </svg>
+          <div class="map-panel">
+            <img
+              src="image0.jpeg"
+              alt="Firefighters seated behind a table covered with operational maps and community preparedness materials"
+            >
 
             <div class="map-caption">
               <strong>Operational mapping mindset</strong>
