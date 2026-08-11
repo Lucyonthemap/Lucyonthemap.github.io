@@ -1365,48 +1365,7 @@
                 </div>
               </div>
             
-              <div class="bar-chart">
-                <div class="bar-col">
-                  <div class="bar" style="height: 9%; animation-delay: 0s;"></div>
-                  <span class="bar-year">2017</span>
-                </div>
-                <div class="bar-col">
-                  <div class="bar" style="height: 2%; animation-delay: 0.05s;"></div>
-                  <span class="bar-year">2018</span>
-                </div>
-                <div class="bar-col">
-                  <div class="bar" style="height: 5%; animation-delay: 0.1s;"></div>
-                  <span class="bar-year">2019</span>
-                </div>
-                <div class="bar-col">
-                  <div class="bar" style="height: 2%; animation-delay: 0.15s;"></div>
-                  <span class="bar-year">2020</span>
-                </div>
-                <div class="bar-col">
-                  <div class="bar" style="height: 16%; animation-delay: 0.2s;"></div>
-                  <span class="bar-year">2021</span>
-                </div>
-                <div class="bar-col">
-                  <div class="bar" style="height: 9%; animation-delay: 0.25s;"></div>
-                  <span class="bar-year">2022</span>
-                </div>
-                <div class="bar-col">
-                  <div class="bar" style="height: 12%; animation-delay: 0.3s;"></div>
-                  <span class="bar-year">2023</span>
-                </div>
-                <div class="bar-col">
-                  <div class="bar" style="height: 30%; animation-delay: 0.35s;"></div>
-                  <span class="bar-year">2024</span>
-                </div>
-                <div class="bar-col">
-                  <div class="bar" style="height: 100%; animation-delay: 0.4s;"></div>
-                  <span class="bar-year">2025</span>
-                </div>
-                <div class="bar-col">
-                  <div class="bar" style="height: 98%; animation-delay: 0.45s;"></div>
-                  <span class="bar-year">2026</span>
-                </div>
-              </div>
+              <div class="bar-chart" id="citations-chart"></div>
             </div>
           </div>
 
@@ -1646,5 +1605,46 @@
       </span>
     </div>
   </footer>
+
+  <script>
+    // Citations per year
+    // Update ONLY the count values below. The chart rescales itself automatically.
+    // These starting values preserve the proportions of the original chart;
+    // replace them with the actual Google Scholar citation counts when available.
+    const citationsPerYear = [
+      { year: 2017, count: 9 },
+      { year: 2018, count: 2 },
+      { year: 2019, count: 5 },
+      { year: 2020, count: 2 },
+      { year: 2021, count: 16 },
+      { year: 2022, count: 9 },
+      { year: 2023, count: 12 },
+      { year: 2024, count: 30 },
+      { year: 2025, count: 100 },
+      { year: 2026, count: 98 }
+    ];
+
+    const citationsChart = document.getElementById("citations-chart");
+    const maxCitations = Math.max(...citationsPerYear.map(({ count }) => count), 1);
+
+    citationsPerYear.forEach(({ year, count }, index) => {
+      const column = document.createElement("div");
+      column.className = "bar-col";
+
+      const bar = document.createElement("div");
+      bar.className = "bar";
+      bar.style.height = `${(count / maxCitations) * 100}%`;
+      bar.style.animationDelay = `${index * 0.05}s`;
+      bar.title = `${year}: ${count} citation${count === 1 ? "" : "s"}`;
+      bar.setAttribute("aria-label", bar.title);
+
+      const yearLabel = document.createElement("span");
+      yearLabel.className = "bar-year";
+      yearLabel.textContent = year;
+
+      column.append(bar, yearLabel);
+      citationsChart.appendChild(column);
+    });
+  </script>
 </body>
 </html>
