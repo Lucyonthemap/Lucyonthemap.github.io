@@ -2,42 +2,1152 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>About Me</title>
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <meta
+    name="description"
+    content="Research portfolio of Lucila M. Corro, an ecologist, spatial analyst, and geospatial data scientist."
+  >
+
+  <title>Lucila M. Corro, M.S. | Geospatial Data Scientist</title>
+
   <style>
+    :root {
+      --background: #071018;
+      --background-soft: #0b1722;
+      --panel: rgba(14, 29, 41, 0.78);
+      --panel-solid: #0e1d29;
+      --panel-light: #132838;
+      --text: #eef7fb;
+      --text-soft: #a8bbc7;
+      --text-muted: #728896;
+      --cyan: #5ce1e6;
+      --cyan-soft: rgba(92, 225, 230, 0.12);
+      --blue: #57a7ff;
+      --green: #74e0a7;
+      --border: rgba(130, 194, 218, 0.16);
+      --border-bright: rgba(92, 225, 230, 0.34);
+      --shadow: 0 28px 80px rgba(0, 0, 0, 0.36);
+      --radius-large: 28px;
+      --radius-medium: 18px;
+      --page-width: 1180px;
+      --mono:
+        "SFMono-Regular",
+        Consolas,
+        "Liberation Mono",
+        Menlo,
+        monospace;
+      --sans:
+        Inter,
+        ui-sans-serif,
+        system-ui,
+        -apple-system,
+        BlinkMacSystemFont,
+        "Segoe UI",
+        sans-serif;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
     body {
-      font-family: Arial, sans-serif;
-      text-align: center;
       margin: 0;
-      padding: 20px;
-      background-color: #f4f4f4;
+      color: var(--text);
+      background:
+        linear-gradient(rgba(92, 225, 230, 0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(92, 225, 230, 0.035) 1px, transparent 1px),
+        radial-gradient(
+          circle at 85% 8%,
+          rgba(43, 126, 168, 0.18),
+          transparent 34rem
+        ),
+        var(--background);
+      background-size:
+        42px 42px,
+        42px 42px,
+        auto,
+        auto;
+      font-family: var(--sans);
+      line-height: 1.7;
     }
-    .container {
-      max-width: 600px;
-      margin: auto;
-      background: #fff;
-      padding: 20px;
-      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+
+    body::before {
+      content: "";
+      position: fixed;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+      background:
+        radial-gradient(
+          circle at 15% 35%,
+          rgba(39, 94, 123, 0.13),
+          transparent 28rem
+        );
     }
-    img {
+
+    img,
+    iframe {
       max-width: 100%;
-      height: auto;
-      border-radius: 5px;
     }
-    .about-text {
-      margin-top: 20px;
-      font-size: 18px;
-      color: #333;
+
+    a {
+      color: inherit;
+    }
+
+    .page-width {
+      width: min(var(--page-width), calc(100% - 44px));
+      margin: 0 auto;
+    }
+
+    .site-nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      border-bottom: 1px solid var(--border);
+      background: rgba(7, 16, 24, 0.82);
+      backdrop-filter: blur(18px);
+    }
+
+    .nav-inner {
+      min-height: 74px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 30px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+    }
+
+    .brand-mark {
+      display: grid;
+      place-items: center;
+      width: 38px;
+      height: 38px;
+      border: 1px solid var(--border-bright);
+      border-radius: 10px;
+      color: var(--cyan);
+      background: var(--cyan-soft);
+      font-family: var(--mono);
+      font-size: 0.88rem;
+      font-weight: 700;
+    }
+
+    .brand-name {
+      font-size: 0.96rem;
+      font-weight: 750;
+      letter-spacing: -0.01em;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .nav-links a {
+      display: block;
+      padding: 9px 13px;
+      color: var(--text-soft);
+      border-radius: 9px;
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      text-decoration: none;
+      transition:
+        color 160ms ease,
+        background-color 160ms ease;
+    }
+
+    .nav-links a:hover,
+    .nav-links a:focus-visible {
+      color: var(--cyan);
+      background: var(--cyan-soft);
+    }
+
+    .hero {
+      min-height: calc(100vh - 74px);
+      display: grid;
+      grid-template-columns: minmax(0, 1.05fr) minmax(360px, 0.95fr);
+      align-items: center;
+      gap: 72px;
+      padding-top: 70px;
+      padding-bottom: 90px;
+    }
+
+    .hero-copy {
+      position: relative;
+      z-index: 2;
+    }
+
+    .status-line {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 24px;
+      padding: 8px 12px;
+      color: var(--green);
+      border: 1px solid rgba(116, 224, 167, 0.22);
+      border-radius: 999px;
+      background: rgba(116, 224, 167, 0.07);
+      font-family: var(--mono);
+      font-size: 0.76rem;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--green);
+      box-shadow: 0 0 14px rgba(116, 224, 167, 0.7);
+    }
+
+    .hero h1 {
+      max-width: 780px;
+      margin: 0;
+      font-size: clamp(3.4rem, 8vw, 6.8rem);
+      line-height: 0.93;
+      letter-spacing: -0.065em;
+    }
+
+    .hero h1 span {
+      display: block;
+      color: var(--cyan);
+    }
+
+    .hero-intro {
+      max-width: 680px;
+      margin: 30px 0 0;
+      color: var(--text-soft);
+      font-size: clamp(1.08rem, 2vw, 1.28rem);
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      margin-top: 34px;
+    }
+
+    .button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      min-height: 48px;
+      padding: 0 19px;
+      border: 1px solid var(--border);
+      border-radius: 11px;
+      font-family: var(--mono);
+      font-size: 0.82rem;
+      font-weight: 700;
+      text-decoration: none;
+      transition:
+        transform 160ms ease,
+        background-color 160ms ease,
+        border-color 160ms ease,
+        box-shadow 160ms ease;
+    }
+
+    .button-primary {
+      color: #031014;
+      border-color: var(--cyan);
+      background: var(--cyan);
+      box-shadow: 0 12px 32px rgba(92, 225, 230, 0.18);
+    }
+
+    .button-secondary {
+      color: var(--text);
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .button:hover {
+      transform: translateY(-2px);
+    }
+
+    .button-primary:hover {
+      box-shadow: 0 16px 38px rgba(92, 225, 230, 0.28);
+    }
+
+    .button-secondary:hover {
+      color: var(--cyan);
+      border-color: var(--border-bright);
+      background: var(--cyan-soft);
+    }
+
+    .hero-visual {
+      position: relative;
+      min-height: 590px;
+    }
+
+    .landscape-panel {
+      position: absolute;
+      inset: 0 0 74px 40px;
+      overflow: hidden;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-large);
+      background-image:
+        linear-gradient(
+          to top,
+          rgba(7, 16, 24, 0.92),
+          rgba(7, 16, 24, 0.08) 62%
+        ),
+        url("IMG_0260 - Copy.JPG");
+      background-position: center;
+      background-size: cover;
+      box-shadow: var(--shadow);
+    }
+
+    .landscape-panel::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      border-radius: inherit;
+      box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.04);
+    }
+
+    .profile-chip {
+      position: absolute;
+      left: 0;
+      bottom: 0;
+      z-index: 3;
+      display: grid;
+      grid-template-columns: 88px minmax(0, 1fr);
+      gap: 16px;
+      align-items: center;
+      width: min(390px, calc(100% - 26px));
+      padding: 16px;
+      border: 1px solid var(--border-bright);
+      border-radius: 18px;
+      background: rgba(10, 25, 35, 0.9);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(18px);
+    }
+
+    .headshot {
+      width: 88px;
+      height: 88px;
+      border: 2px solid rgba(92, 225, 230, 0.36);
+      border-radius: 14px;
+      object-fit: cover;
+      object-position: center top;
+    }
+
+    .profile-chip-label {
+      margin: 0 0 3px;
+      color: var(--cyan);
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .profile-chip h2 {
+      margin: 0;
+      font-size: 1.08rem;
+      line-height: 1.25;
+    }
+
+    .profile-chip p {
+      margin: 5px 0 0;
+      color: var(--text-soft);
+      font-size: 0.86rem;
+      line-height: 1.4;
+    }
+
+    .section {
+      padding: 96px 0;
+      border-top: 1px solid var(--border);
+    }
+
+    .section-heading {
+      display: grid;
+      grid-template-columns: 180px minmax(0, 1fr);
+      gap: 36px;
+      margin-bottom: 48px;
+    }
+
+    .section-index {
+      padding-top: 7px;
+      color: var(--cyan);
+      font-family: var(--mono);
+      font-size: 0.78rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .section-heading h2 {
+      max-width: 760px;
+      margin: 0;
+      font-size: clamp(2.2rem, 5vw, 4rem);
+      line-height: 1.05;
+      letter-spacing: -0.045em;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: minmax(0, 1.35fr) minmax(300px, 0.65fr);
+      gap: 34px;
+    }
+
+    .content-panel,
+    .code-panel,
+    .project-card,
+    .capability-card,
+    .embed-card {
+      border: 1px solid var(--border);
+      background: var(--panel);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(16px);
+    }
+
+    .content-panel {
+      padding: 34px;
+      border-radius: var(--radius-large);
+    }
+
+    .content-panel p {
+      margin: 0 0 20px;
+      color: var(--text-soft);
+      font-size: 1.04rem;
+    }
+
+    .content-panel p:last-child {
+      margin-bottom: 0;
+    }
+
+    .content-panel strong {
+      color: var(--text);
+    }
+
+    .code-panel {
+      overflow: hidden;
+      border-radius: var(--radius-large);
+    }
+
+    .code-bar {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--border);
+      background: rgba(255, 255, 255, 0.025);
+    }
+
+    .window-dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: var(--text-muted);
+      opacity: 0.7;
+    }
+
+    .code-title {
+      margin-left: 8px;
+      color: var(--text-muted);
+      font-family: var(--mono);
+      font-size: 0.72rem;
+    }
+
+    .code-content {
+      margin: 0;
+      padding: 26px;
+      overflow-x: auto;
+      color: var(--text-soft);
+      font-family: var(--mono);
+      font-size: 0.82rem;
+      line-height: 1.9;
+      white-space: pre-wrap;
+    }
+
+    .code-key {
+      color: var(--blue);
+    }
+
+    .code-string {
+      color: var(--green);
+    }
+
+    .code-bracket {
+      color: var(--cyan);
+    }
+
+    .metrics {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+      margin-top: 34px;
+    }
+
+    .metric {
+      padding: 20px;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      background: rgba(255, 255, 255, 0.025);
+    }
+
+    .metric strong {
+      display: block;
+      color: var(--cyan);
+      font-family: var(--mono);
+      font-size: 1.4rem;
+    }
+
+    .metric span {
+      display: block;
+      margin-top: 4px;
+      color: var(--text-muted);
+      font-size: 0.82rem;
+    }
+
+    .project-card {
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(280px, 0.8fr);
+      gap: 42px;
+      padding: 42px;
+      border-radius: var(--radius-large);
+    }
+
+    .project-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 22px;
+    }
+
+    .tag {
+      padding: 7px 10px;
+      color: var(--cyan);
+      border: 1px solid var(--border-bright);
+      border-radius: 999px;
+      background: var(--cyan-soft);
+      font-family: var(--mono);
+      font-size: 0.7rem;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+    }
+
+    .project-card h3 {
+      margin: 0;
+      font-size: clamp(1.9rem, 4vw, 3rem);
+      line-height: 1.08;
+      letter-spacing: -0.04em;
+    }
+
+    .project-card p {
+      margin: 22px 0 0;
+      color: var(--text-soft);
+      font-size: 1.02rem;
+    }
+
+    .project-side {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 30px;
+      padding: 26px;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-medium);
+      background:
+        linear-gradient(
+          145deg,
+          rgba(92, 225, 230, 0.08),
+          rgba(87, 167, 255, 0.04)
+        );
+    }
+
+    .project-side-label {
+      margin: 0 0 14px;
+      color: var(--text-muted);
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .project-side ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .project-side li {
+      padding: 10px 0;
+      color: var(--text-soft);
+      border-bottom: 1px solid var(--border);
+      font-size: 0.9rem;
+    }
+
+    .project-side li:last-child {
+      border-bottom: 0;
+    }
+
+    .capability-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .capability-card {
+      min-height: 220px;
+      padding: 28px;
+      border-radius: var(--radius-medium);
+      transition:
+        transform 180ms ease,
+        border-color 180ms ease,
+        background-color 180ms ease;
+    }
+
+    .capability-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--border-bright);
+      background: var(--panel-light);
+    }
+
+    .capability-number {
+      color: var(--cyan);
+      font-family: var(--mono);
+      font-size: 0.72rem;
+    }
+
+    .capability-card h3 {
+      margin: 28px 0 12px;
+      font-size: 1.22rem;
+    }
+
+    .capability-card p {
+      margin: 0;
+      color: var(--text-soft);
+      font-size: 0.94rem;
+    }
+
+    .embed-card {
+      overflow: hidden;
+      border-radius: var(--radius-large);
+    }
+
+    .embed-header {
+      padding: 20px 24px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .embed-header p {
+      margin: 0;
+      color: var(--text-muted);
+      font-family: var(--mono);
+      font-size: 0.75rem;
+      text-transform: uppercase;
+    }
+
+    .embed-card iframe {
+      display: block;
+      width: 100%;
+      min-height: 520px;
+      border: 0;
+      background: #ffffff;
+    }
+
+    .site-footer {
+      padding: 38px 0;
+      color: var(--text-muted);
+      border-top: 1px solid var(--border);
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      font-family: var(--mono);
+      font-size: 0.72rem;
+    }
+
+    .footer-accent {
+      color: var(--cyan);
+    }
+
+    a:focus-visible {
+      outline: 3px solid rgba(92, 225, 230, 0.34);
+      outline-offset: 4px;
+    }
+
+    @media (max-width: 960px) {
+      .hero {
+        grid-template-columns: 1fr;
+        gap: 52px;
+      }
+
+      .hero-visual {
+        min-height: 540px;
+      }
+
+      .landscape-panel {
+        inset: 0 0 70px 30px;
+      }
+
+      .about-grid,
+      .project-card {
+        grid-template-columns: 1fr;
+      }
+
+      .capability-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (max-width: 700px) {
+      .page-width {
+        width: min(var(--page-width), calc(100% - 26px));
+      }
+
+      .nav-inner {
+        min-height: 66px;
+      }
+
+      .brand-name {
+        display: none;
+      }
+
+      .nav-links {
+        overflow-x: auto;
+      }
+
+      .nav-links a {
+        padding-inline: 9px;
+        font-size: 0.7rem;
+      }
+
+      .hero {
+        min-height: auto;
+        padding-top: 54px;
+        padding-bottom: 70px;
+      }
+
+      .hero h1 {
+        font-size: clamp(3rem, 16vw, 4.7rem);
+      }
+
+      .hero-visual {
+        min-height: 470px;
+      }
+
+      .landscape-panel {
+        inset: 0 0 78px 14px;
+      }
+
+      .profile-chip {
+        grid-template-columns: 72px 1fr;
+      }
+
+      .headshot {
+        width: 72px;
+        height: 72px;
+      }
+
+      .section {
+        padding: 72px 0;
+      }
+
+      .section-heading {
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+
+      .content-panel,
+      .project-card {
+        padding: 25px;
+      }
+
+      .metrics {
+        grid-template-columns: 1fr;
+      }
+
+      .capability-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-inner {
+        flex-direction: column;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .nav-links a {
+        font-size: 0.66rem;
+      }
+
+      .hero-actions {
+        display: grid;
+      }
+
+      .button {
+        width: 100%;
+      }
+
+      .hero-visual {
+        min-height: 430px;
+      }
+
+      .profile-chip {
+        width: calc(100% - 12px);
+      }
+
+      .project-card {
+        padding: 20px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      *,
+      *::before,
+      *::after {
+        transition: none !important;
+      }
     }
   </style>
 </head>
-<body>
-  <div class="container">
-    <img src="IMG_6622.JPG" alt="Description of Image">
-    <div class="about-text">
-      <h1>About Me</h1>
-      <p>Find my new CONUS wide urban tree canopy cover dataset here:</p>
-      <p><a href="https://www.sciencebase.gov/catalog/item/662aeb7dd34ea70bd5f0c1dd">An enhanced national-scale urban tree canopy cover dataset for the United States Data Release (2025)</a></p>    </div>
-  </div>
+
+<body id="home">
+  <nav class="site-nav" aria-label="Primary navigation">
+    <div class="page-width nav-inner">
+      <a class="brand" href="#home">
+        <span class="brand-mark">&lt;LC/&gt;</span>
+        <span class="brand-name">Lucila M. Corro</span>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="#home">01_HOME</a></li>
+        <li><a href="research.html">02_RESEARCH</a></li>
+        <li><a href="publications.html">03_PUBLICATIONS</a></li>
+        <li><a href="contact.html">04_CONTACT</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main>
+    <section class="page-width hero">
+      <div class="hero-copy">
+        <div class="status-line">
+          <span class="status-dot"></span>
+          Geospatial data science + ecology
+        </div>
+
+        <h1>
+          Lucila M. Corro
+          <span>Spatial intelligence through code.</span>
+        </h1>
+
+        <p class="hero-intro">
+          I am an ecologist, spatial analyst, and geospatial data
+          scientist using programming, remote sensing, and
+          environmental data to understand changing landscapes.
+        </p>
+
+        <div class="hero-actions">
+          <a class="button button-primary" href="#featured-work">
+            Explore featured work
+            <span aria-hidden="true">→</span>
+          </a>
+
+          <a class="button button-secondary" href="publications.html">
+            View publications
+          </a>
+        </div>
+      </div>
+
+      <div class="hero-visual">
+        <div
+          class="landscape-panel"
+          role="img"
+          aria-label="Environmental landscape"
+        ></div>
+
+        <div class="profile-chip">
+          <img
+            src="IMG_2875.JPG"
+            alt="Portrait of Lucila M. Corro"
+            class="headshot"
+          >
+
+          <div>
+            <p class="profile-chip-label">Profile</p>
+            <h2>Ecologist + Spatial Analyst</h2>
+            <p>U.S. Geological Survey</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="about">
+      <div class="page-width">
+        <div class="section-heading">
+          <div class="section-index">01 / About</div>
+
+          <h2>
+            Combining ecological expertise with computational
+            problem-solving.
+          </h2>
+        </div>
+
+        <div class="about-grid">
+          <div class="content-panel">
+            <p>
+              I am an <strong>ecologist and spatial analyst</strong>
+              at the U.S. Geological Survey. I earned a Master of
+              Science in Environmental Sciences and Management,
+              with an emphasis in geospatial studies, from Cal Poly
+              Humboldt.
+            </p>
+
+            <p>
+              My work combines geospatial analysis, environmental
+              modeling, remote sensing, scientific programming, and
+              interdisciplinary research. I focus on land-cover and
+              land-use change, conservation biology, urban ecology,
+              and ecosystem services.
+            </p>
+
+            <p>
+              I have nine years of professional experience working
+              with geospatial and environmental data. Since
+              publishing my first lead-author study in 2017, I have
+              contributed to scientific publications and developed
+              data products that support research, conservation,
+              and environmental decision-making.
+            </p>
+
+            <div class="metrics">
+              <div class="metric">
+                <strong>9+</strong>
+                <span>Years of professional experience</span>
+              </div>
+
+              <div class="metric">
+                <strong>2017</strong>
+                <span>First lead-author publication</span>
+              </div>
+
+              <div class="metric">
+                <strong>CONUS</strong>
+                <span>National-scale data development</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="code-panel">
+            <div class="code-bar">
+              <span class="window-dot"></span>
+              <span class="window-dot"></span>
+              <span class="window-dot"></span>
+              <span class="code-title">profile.json</span>
+            </div>
+
+            <pre class="code-content"><code><span class="code-bracket">{</span>
+  <span class="code-key">"name"</span>: <span class="code-string">"Lucila M. Corro"</span>,
+  <span class="code-key">"role"</span>: <span class="code-string">"Geospatial Data Scientist"</span>,
+  <span class="code-key">"domains"</span>: <span class="code-bracket">[</span>
+    <span class="code-string">"remote sensing"</span>,
+    <span class="code-string">"urban ecology"</span>,
+    <span class="code-string">"land-cover change"</span>,
+    <span class="code-string">"conservation biology"</span>
+  <span class="code-bracket">]</span>,
+  <span class="code-key">"approach"</span>: <span class="code-string">"code + data + ecology"</span>
+<span class="code-bracket">}</span></code></pre>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="featured-work">
+      <div class="page-width">
+        <div class="section-heading">
+          <div class="section-index">02 / Featured work</div>
+
+          <h2>
+            National-scale environmental data built for practical use.
+          </h2>
+        </div>
+
+        <article class="project-card">
+          <div>
+            <div class="project-meta">
+              <span class="tag">Data release</span>
+              <span class="tag">2025</span>
+              <span class="tag">Urban ecology</span>
+              <span class="tag">CONUS</span>
+            </div>
+
+            <h3>
+              An Enhanced National-Scale Urban Tree Canopy Cover
+              Dataset for the United States
+            </h3>
+
+            <p>
+              A national geospatial dataset designed to support urban
+              forestry, land management, environmental planning, and
+              ecological research across the conterminous United
+              States.
+            </p>
+
+            <div class="hero-actions">
+              <a
+                class="button button-primary"
+                href="https://www.sciencebase.gov/catalog/item/662aeb7dd34ea70bd5f0c1dd"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                Open ScienceBase record
+                <span aria-hidden="true">↗</span>
+              </a>
+            </div>
+          </div>
+
+          <aside class="project-side">
+            <div>
+              <p class="project-side-label">Project dimensions</p>
+
+              <ul>
+                <li>National-scale spatial analysis</li>
+                <li>Environmental data development</li>
+                <li>Urban tree canopy assessment</li>
+                <li>Research-ready geospatial products</li>
+              </ul>
+            </div>
+
+            <span class="tag">sciencebase.gov</span>
+          </aside>
+        </article>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="page-width">
+        <div class="section-heading">
+          <div class="section-index">03 / Capabilities</div>
+
+          <h2>
+            Technical work grounded in environmental science.
+          </h2>
+        </div>
+
+        <div class="capability-grid">
+          <article class="capability-card">
+            <span class="capability-number">01</span>
+            <h3>Geospatial Analysis</h3>
+            <p>
+              Spatial data processing, geographic analysis, and
+              landscape-scale assessment for environmental research.
+            </p>
+          </article>
+
+          <article class="capability-card">
+            <span class="capability-number">02</span>
+            <h3>Remote Sensing</h3>
+            <p>
+              Applying remotely sensed data to land-cover,
+              vegetation, ecosystem, and environmental-change
+              questions.
+            </p>
+          </article>
+
+          <article class="capability-card">
+            <span class="capability-number">03</span>
+            <h3>Scientific Programming</h3>
+            <p>
+              Reproducible computational workflows for analyzing,
+              transforming, and communicating scientific data.
+            </p>
+          </article>
+
+          <article class="capability-card">
+            <span class="capability-number">04</span>
+            <h3>Data Products</h3>
+            <p>
+              Development of documented geospatial datasets and
+              research products for collaborators and end users.
+            </p>
+          </article>
+
+          <article class="capability-card">
+            <span class="capability-number">05</span>
+            <h3>Environmental Modeling</h3>
+            <p>
+              Data-driven analysis of ecological systems, species,
+              land-use change, and ecosystem services.
+            </p>
+          </article>
+
+          <article class="capability-card">
+            <span class="capability-number">06</span>
+            <h3>Research Communication</h3>
+            <p>
+              Translating technical findings into publications,
+              visual products, datasets, and decision-support
+              resources.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="page-width">
+        <div class="section-heading">
+          <div class="section-index">04 / Research update</div>
+
+          <h2>
+            Recent work and professional updates.
+          </h2>
+        </div>
+
+        <div class="embed-card">
+          <div class="embed-header">
+            <p>Embedded LinkedIn post</p>
+          </div>
+
+          <iframe
+            src="https://www.linkedin.com/embed/feed/update/urn:li:share:7310119492301312001"
+            height="520"
+            title="LinkedIn post about Lucila Corro's research"
+            loading="lazy"
+            allowfullscreen
+          ></iframe>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="page-width footer-inner">
+      <span>
+        &copy; 2026 Lucila M. Corro
+      </span>
+
+      <span>
+        Built with
+        <span class="footer-accent">data + code + ecology</span>
+      </span>
+    </div>
+  </footer>
 </body>
 </html>
