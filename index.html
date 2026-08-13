@@ -968,8 +968,81 @@
 
     .dashboard-two-col {
       display: grid;
-      grid-template-columns: minmax(0, 1.3fr) minmax(280px, 1fr);
+      grid-template-columns: minmax(0, 1.45fr) minmax(300px, 0.75fr);
       gap: 18px;
+      align-items: stretch;
+    }
+
+    .cumulative-panel {
+      display: flex;
+      flex-direction: column;
+      min-height: 340px;
+    }
+
+    .cumulative-chart {
+      position: relative;
+      flex: 1;
+      min-height: 260px;
+    }
+
+    .cumulative-chart svg {
+      width: 100%;
+      height: 100%;
+      display: block;
+      overflow: visible;
+    }
+
+    .cumulative-gridline {
+      stroke: var(--border);
+      stroke-width: 1;
+    }
+
+    .cumulative-line {
+      fill: none;
+      stroke: var(--cyan);
+      stroke-width: 3;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .cumulative-area {
+      fill: rgba(92, 225, 230, 0.09);
+    }
+
+    .cumulative-point {
+      fill: var(--panel-solid);
+      stroke: var(--cyan);
+      stroke-width: 2.5;
+      cursor: help;
+    }
+
+    .cumulative-label {
+      fill: var(--text-muted);
+      font-family: var(--mono);
+      font-size: 10px;
+    }
+
+    .cumulative-tooltip {
+      position: absolute;
+      z-index: 20;
+      padding: 7px 10px;
+      color: var(--text);
+      border: 1px solid var(--border-bright);
+      border-radius: 8px;
+      background: var(--panel-solid);
+      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.35);
+      font-family: var(--mono);
+      font-size: 0.72rem;
+      line-height: 1.2;
+      white-space: nowrap;
+      opacity: 0;
+      pointer-events: none;
+      transform: translate(-50%, -100%);
+      transition: opacity 140ms ease;
+    }
+
+    .cumulative-tooltip.visible {
+      opacity: 1;
     }
 
     .site-footer {
@@ -1409,28 +1482,19 @@
             </div>
           </div>
 
-          <div class="terminal-window">
-            <div class="terminal-bar">
-              <span class="window-dot red"></span>
-              <span class="window-dot yellow"></span>
-              <span class="window-dot green"></span>
-              <span class="terminal-title">session — zsh</span>
+          <div class="chart-panel cumulative-panel">
+            <div class="chart-panel-header">
+              <h3>Cumulative citations</h3>
+              <div class="chart-legend">
+                <span class="legend-item">
+                  <span class="legend-swatch" style="background: var(--cyan);"></span>
+                  Total over time
+                </span>
+              </div>
             </div>
 
-            <div class="terminal-body">
-              <div><span class="terminal-prompt">$</span> whoami</div>
-              <div><span class="highlight">lucila_corro</span> <span class="comment">// ecologist, spatial analyst</span></div>
-              <div>&nbsp;</div>
-              <div><span class="terminal-prompt">$</span> cat affiliation.txt</div>
-              <div>U.S. Geological Survey</div>
-              <div>&nbsp;</div>
-              <div><span class="terminal-prompt">$</span> ls ./research_focus/</div>
-              <div><span class="path">land_cover_change/</span> <span class="path">urban_ecology/</span></div>
-              <div><span class="path">remote_sensing/</span> <span class="path">conservation_bio/</span></div>
-              <div>&nbsp;</div>
-              <div><span class="terminal-prompt">$</span> ./run_analysis.sh --scale=CONUS</div>
-              <div><span class="ok">✓</span> dataset compiled <span class="comment">// tree canopy, 2025</span></div>
-              <div><span class="terminal-prompt">$</span> <span class="terminal-cursor"></span></div>
+            <div class="cumulative-chart" id="cumulative-chart">
+              <div class="cumulative-tooltip" id="cumulative-tooltip"></div>
             </div>
           </div>
         </div>
@@ -1668,6 +1732,96 @@
     const totalCitations = citationsPerYear.reduce((sum, { count }) => sum + count, 0);
     document.getElementById("total-citations").textContent = totalCitations;
     const maxCitations = Math.max(...citationsPerYear.map(({ count }) => count), 1);
+
+
+    const cumulativeChart = document.getElementById("cumulative-chart");
+    const cumulativeTooltip = document.getElementById("cumulative-tooltip");
+
+    function drawCumulativeChart() {
+      const width = Math.max(cumulativeChart.clientWidth, 300);
+      const height = Math.max(cumulativeChart.clientHeight, 260);
+      const margin = { top: 16, right: 18, bottom: 34, left: 38 };
+      const plotWidth = width - margin.left - margin.right;
+      const plotHeight = height - margin.top - margin.bottom;
+
+      let runningTotal = 0;
+      const cumulativeData = citationsPerYear.map(({ year, count }) => {
+        runningTotal += count;
+        return { year, total: runningTotal };
+      });
+
+      const maxTotal = Math.max(...cumulativeData.map(d => d.total), 1);
+      const x = i => margin.left + (cumulativeData.length === 1 ? plotWidth / 2 : i * plotWidth / (cumulativeData.length - 1));
+      const y = value => margin.top + plotHeight - (value / maxTotal) * plotHeight;
+      const ns = "http://www.w3.org/2000/svg";
+
+      cumulativeChart.querySelector("svg")?.remove();
+      const svg = document.createElementNS(ns, "svg");
+      svg.setAttribute("viewBox", `0 0 ${width} ${height}`);
+      svg.setAttribute("role", "img");
+      svg.setAttribute("aria-label", "Cumulative citations over time");
+
+      [0, .25, .5, .75, 1].forEach(step => {
+        const gy = margin.top + plotHeight - step * plotHeight;
+        const line = document.createElementNS(ns, "line");
+        line.setAttribute("x1", margin.left);
+        line.setAttribute("x2", width - margin.right);
+        line.setAttribute("y1", gy);
+        line.setAttribute("y2", gy);
+        line.setAttribute("class", "cumulative-gridline");
+        svg.appendChild(line);
+      });
+
+      const area = document.createElementNS(ns, "path");
+      const areaPath = cumulativeData.map((d, i) => `${i ? "L" : "M"} ${x(i)} ${y(d.total)}`).join(" ")
+        + ` L ${x(cumulativeData.length - 1)} ${margin.top + plotHeight} L ${x(0)} ${margin.top + plotHeight} Z`;
+      area.setAttribute("d", areaPath);
+      area.setAttribute("class", "cumulative-area");
+      svg.appendChild(area);
+
+      const path = document.createElementNS(ns, "path");
+      path.setAttribute("d", cumulativeData.map((d, i) => `${i ? "L" : "M"} ${x(i)} ${y(d.total)}`).join(" "));
+      path.setAttribute("class", "cumulative-line");
+      svg.appendChild(path);
+
+      cumulativeData.forEach((d, i) => {
+        if (i === 0 || i === cumulativeData.length - 1 || i % 2 === 0) {
+          const label = document.createElementNS(ns, "text");
+          label.setAttribute("x", x(i));
+          label.setAttribute("y", height - 10);
+          label.setAttribute("text-anchor", "middle");
+          label.setAttribute("class", "cumulative-label");
+          label.textContent = String(d.year).slice(-2);
+          svg.appendChild(label);
+        }
+
+        const point = document.createElementNS(ns, "circle");
+        point.setAttribute("cx", x(i));
+        point.setAttribute("cy", y(d.total));
+        point.setAttribute("r", 4.5);
+        point.setAttribute("class", "cumulative-point");
+        point.setAttribute("tabindex", "0");
+        point.setAttribute("aria-label", `${d.year}: ${d.total} cumulative citations`);
+
+        const showTooltip = () => {
+          cumulativeTooltip.textContent = `${d.year}: ${d.total} citations`;
+          cumulativeTooltip.style.left = `${x(i)}px`;
+          cumulativeTooltip.style.top = `${y(d.total) - 8}px`;
+          cumulativeTooltip.classList.add("visible");
+        };
+        const hideTooltip = () => cumulativeTooltip.classList.remove("visible");
+        point.addEventListener("mouseenter", showTooltip);
+        point.addEventListener("mouseleave", hideTooltip);
+        point.addEventListener("focus", showTooltip);
+        point.addEventListener("blur", hideTooltip);
+        svg.appendChild(point);
+      });
+
+      cumulativeChart.appendChild(svg);
+    }
+
+    drawCumulativeChart();
+    window.addEventListener("resize", drawCumulativeChart);
 
     citationsPerYear.forEach(({ year, count }, index) => {
       const column = document.createElement("div");
