@@ -1806,7 +1806,7 @@
           label.setAttribute("y", height - 10);
           label.setAttribute("text-anchor", "middle");
           label.setAttribute("class", "cumulative-label");
-          label.textContent = String(d.year).slice(-2);
+          label.textContent = d.year;
           svg.appendChild(label);
         }
 
