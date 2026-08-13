@@ -968,21 +968,37 @@
 
     .dashboard-two-col {
       display: grid;
-      grid-template-columns: minmax(0, 1.45fr) minmax(300px, 0.75fr);
+      grid-template-columns: minmax(0, 2fr) minmax(320px, 1fr);
       gap: 18px;
       align-items: stretch;
+    }
+
+    .dashboard-two-col > .chart-panel {
+      margin-bottom: 0;
+    }
+
+    .dashboard-two-col > .chart-panel:first-child {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .dashboard-two-col > .chart-panel:first-child .bar-chart {
+      flex: 1;
+      height: auto;
+      min-height: 260px;
     }
 
     .cumulative-panel {
       display: flex;
       flex-direction: column;
-      min-height: 340px;
+      aspect-ratio: 1 / 1;
+      min-height: 0;
     }
 
     .cumulative-chart {
       position: relative;
       flex: 1;
-      min-height: 260px;
+      min-height: 0;
     }
 
     .cumulative-chart svg {
@@ -1480,7 +1496,6 @@
             
               <div class="bar-chart" id="citations-chart"></div>
             </div>
-          </div>
 
           <div class="chart-panel cumulative-panel">
             <div class="chart-panel-header">
