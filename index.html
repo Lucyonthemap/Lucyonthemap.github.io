@@ -727,7 +727,7 @@
 
     .dashboard-grid {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
+      grid-template-columns: repeat(5, 1fr);
       gap: 18px;
       margin-bottom: 24px;
     }
@@ -1364,6 +1364,14 @@
 
           <div class="stat-panel">
             <div class="stat-label">
+              <span>Total citations</span>
+              <span class="stat-trend">Google Scholar</span>
+            </div>
+            <div class="stat-value"><span id="total-citations">126</span></div>
+          </div>
+
+          <div class="stat-panel">
+            <div class="stat-label">
               <span>Coverage scale</span>
               <span class="stat-trend">worldwide</span>
             </div>
@@ -1657,6 +1665,8 @@
     ];
 
     const citationsChart = document.getElementById("citations-chart");
+    const totalCitations = citationsPerYear.reduce((sum, { count }) => sum + count, 0);
+    document.getElementById("total-citations").textContent = totalCitations;
     const maxCitations = Math.max(...citationsPerYear.map(({ count }) => count), 1);
 
     citationsPerYear.forEach(({ year, count }, index) => {
