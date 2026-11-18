@@ -1744,9 +1744,11 @@
     ];
 
     const citationsChart = document.getElementById("citations-chart");
-    const totalCitations = citationsPerYear.reduce((sum, { count }) => sum + count, 0);
+    //const totalCitations = citationsPerYear.reduce((sum, { count }) => sum + count, 0);
+    const totalCitations = citationsPerYear.reduce((sum, { count }) => sum + count, 0) + 2;
+    
     document.getElementById("total-citations").textContent = totalCitations;
-    const maxCitations = Math.max(...citationsPerYear.map(({ count }) => count), 1);
+    const maxCitations = Math.max(...citationsPerYear.map(({ count }) => count), 1) + 2;
 
 
     const cumulativeChart = document.getElementById("cumulative-chart");
