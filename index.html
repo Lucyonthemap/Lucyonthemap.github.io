@@ -1762,9 +1762,12 @@
       const plotHeight = height - margin.top - margin.bottom;
 
       let runningTotal = 0;
-      const cumulativeData = citationsPerYear.map(({ year, count }) => {
+      const cumulativeData = citationsPerYear.map(({ year, count }, index) => {
         runningTotal += count;
-        return { year, total: runningTotal };
+        return {
+          year,
+          total: runningTotal + (index === citationsPerYear.length - 1 ? 2 : 0)
+        };
       });
 
       const maxTotal = Math.max(...cumulativeData.map(d => d.total), 1);
